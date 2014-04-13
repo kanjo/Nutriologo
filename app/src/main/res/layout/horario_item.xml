@@ -11,8 +11,11 @@
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/coffee" />
+        android:id="@+id/imgHorario"
+        android:src="@drawable/ic_coffee1"
+        android:maxHeight="64dp"
+        android:maxWidth="64dp"
+         />
 
     <TextView
         android:layout_width="wrap_content"

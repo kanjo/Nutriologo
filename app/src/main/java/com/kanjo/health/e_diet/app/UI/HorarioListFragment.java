@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.kanjo.health.e_diet.app.R;
 
 import com.kanjo.health.e_diet.app.UI.dummy.DummyContent;
+import com.kanjo.health.e_diet.app.domain.HorariosFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
 
         for (String m : mHorariosArray) mHorariosList.add(m);
 
-        mAdapter = new AdapterHorarios(getActivity(),0,mHorariosList);
+        mAdapter = new AdapterHorarios(getActivity(),0, HorariosFactory.HORARIOS);
     }
 
     @Override

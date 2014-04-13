@@ -24,6 +24,103 @@ public class GrupoAlimentosFactory {
         build();
     }
 
+    public static  GrupoAlimentosFactory GRUPO_ALIMENTOS;
+
+
+    public static class VERDURAS
+    {
+        public  final static List<AlimentoPorcion> LIST_VERDURAS;
+
+        static
+        {
+            LIST_VERDURAS = GRUPO_ALIMENTOS.buildVerduras();
+        }
+    }
+    public static class FRUTAS
+    {
+
+        public  final static List<AlimentoPorcion> LIST_FRUTAS;
+
+        static
+        {
+            LIST_FRUTAS = GRUPO_ALIMENTOS.buildFrutas();
+        }
+
+    }
+
+    public static class CerealesConGrasa
+    {
+        public  final static List<AlimentoPorcion> LIST_CEREALES_CON_GRASA;
+
+        static
+        {
+            LIST_CEREALES_CON_GRASA = GRUPO_ALIMENTOS.buildCerealesConGrasa();
+        }
+
+    }
+
+    public static class CerealesSinGrasa {
+
+        public  final static List<AlimentoPorcion> LIST_CEREALES_SIN_GRASA;
+
+        static
+        {
+            LIST_CEREALES_SIN_GRASA = GRUPO_ALIMENTOS.buildCerealesSinGrasa();
+        }
+
+    }
+
+    public static class  Entradas {
+
+        public final static List<AlimentoPorcion> LIST_ENTRADAS_DE_CARNES_FRIAS;
+        public final static List<AlimentoPorcion> LIST_ENTRADAS_DE_CREMAS;
+        public final static List<AlimentoPorcion> LIST_ENTRADAS_DE_LEGUMINOSAS;
+
+        static
+        {
+            LIST_ENTRADAS_DE_CARNES_FRIAS = GRUPO_ALIMENTOS.buildEntradasDeCarnesFrias();
+            LIST_ENTRADAS_DE_CREMAS = GRUPO_ALIMENTOS.buildEntradasDeCremas();
+            LIST_ENTRADAS_DE_LEGUMINOSAS = GRUPO_ALIMENTOS.buildEntradasLeguminosas();
+
+        }
+
+    }
+
+    public class Omeletes
+    {
+
+    }
+
+    public class Ensaladas
+    {
+
+    }
+
+    public class POAMuyBajoAporteDeGrasa
+    {
+
+    }
+
+    public class POABajoAporteGrasa
+    {
+
+    }
+
+
+    public class Leche
+    {
+
+    }
+
+    public class AceitesSinProteina
+    {
+
+    }
+
+    public class AceitesConProteina
+    {
+
+    }
 
     public Map<String, List<AlimentoPorcion>> listGrupoAlimentos;
 

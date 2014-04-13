@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.R;
+import com.kanjo.health.e_diet.app.domain.HorariosFactory;
 
 import java.util.List;
 
@@ -16,13 +17,13 @@ import java.util.List;
 /**
  * Created by JARP on 4/9/14.
  */
-public class AdapterHorarios extends ArrayAdapter<String> {
+public class AdapterHorarios extends ArrayAdapter<HorariosFactory.Horario> {
 
     Context mContext;
 
-    List<String>mHorarios;
+    List<HorariosFactory.Horario>mHorarios;
 
-    public AdapterHorarios(Context context, int resource, List<String> horarios) {
+    public AdapterHorarios(Context context, int resource, List<HorariosFactory.Horario> horarios) {
         super(context, R.layout.horario_item,horarios);
 
         mHorarios = horarios;
@@ -45,16 +46,20 @@ public class AdapterHorarios extends ArrayAdapter<String> {
 
             mViewHolder.mTitle =(TextView) mHorarioView.findViewById(R.id.titleHorario);
 
-            mViewHolder.mTitle.setText(mHorarios.get(position));
+            mViewHolder.mTitle.setText(mHorarios.get(position).DESCRIPTION);
 
-            //TODO:Falta agregar la imagen
+            mViewHolder.mImage = (ImageView) mHorarioView.findViewById(R.id.imgHorario);
+
+            mViewHolder.mImage.setImageResource(mHorarios.get(position).DRAWABLE);
 
             mHorarioView.setTag(mViewHolder);
         }
 
         ViewHolder holder = (ViewHolder) mHorarioView.getTag();
 
-        holder.mTitle.setText(mHorarios.get(position));
+        holder.mTitle.setText(mHorarios.get(position).DESCRIPTION);
+
+        holder.mImage.setImageResource(mHorarios.get(position).DRAWABLE);
 
         return mHorarioView;
     }
@@ -64,7 +69,7 @@ public class AdapterHorarios extends ArrayAdapter<String> {
     private static class ViewHolder
     {
         public TextView mTitle;
-        public ImageView mImageTitle;
+        public ImageView mImage;
 
     }
 
