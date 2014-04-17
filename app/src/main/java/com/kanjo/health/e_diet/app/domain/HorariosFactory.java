@@ -3,12 +3,15 @@ package com.kanjo.health.e_diet.app.domain;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v4.util.ArrayMap;
 
 import com.kanjo.health.e_diet.app.R;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by JARP on 4/22/24.
@@ -16,28 +19,37 @@ import java.util.List;
 public  class HorariosFactory {
 
 
-    public static  List<Horario> HORARIOS;
+    private  List<Horario> HORARIOS;
 
-    static {
+
+
+    public List<Horario> buildHorarios()
+    {
+
         HORARIOS = new ArrayList<Horario>();
         HORARIOS.add(new DESAYUNO());
         HORARIOS.add(new COLACION());
         HORARIOS.add(new COMIDA());
         HORARIOS.add(new COLACION());
         HORARIOS.add(new CENA());
-
+        return  HORARIOS;
     }
-    public static class Horario
+
+    public class Horario implements Serializable
     {
         public String DESCRIPTION;
         public Uri mImageFile ;
         public int DRAWABLE;
-
-
+        public List<GroupAlimentosFactory.GroupAlimento> ListGroupAlimentos;
     }
 
 
-    public static class DESAYUNO extends Horario  {
+
+
+
+
+
+    public class DESAYUNO extends Horario  {
 
         public DESAYUNO()
         {
@@ -45,9 +57,15 @@ public  class HorariosFactory {
             this.mImageFile = getUriFromFile(R.drawable.ic_eggs_basket);
             this.DRAWABLE =R.drawable.ic_eggs_basket2;
         }
+
+        @Override
+        public String toString()
+        {
+            return "Este es el" +  this.DESCRIPTION ;
+        }
     }
 
-    public static class COLACION extends Horario {
+    public class COLACION extends Horario {
         public COLACION()
         {
             this.DESCRIPTION = "Colación";
@@ -55,9 +73,15 @@ public  class HorariosFactory {
             this.DRAWABLE = R.drawable.ic_bunch_ingredients2;
         }
 
+        @Override
+        public String toString()
+        {
+            return "Este es el" +  this.DESCRIPTION ;
+        }
+
     }
 
-    public static class COMIDA extends Horario {
+    public class COMIDA extends Horario {
 
         public COMIDA()
         {
@@ -66,16 +90,28 @@ public  class HorariosFactory {
             this.DRAWABLE =R.drawable.ic_vegetarian_food2;
         }
 
+        @Override
+        public String toString()
+        {
+            return "Este es el" +  this.DESCRIPTION ;
+        }
+
 
     }
 
-    public static class CENA extends Horario {
+    public class CENA extends Horario {
 
         public CENA()
         {
             this.DESCRIPTION = "Cena";
             this.mImageFile= getUriFromFile(R.drawable.ic_wheat2);
             this.DRAWABLE = R.drawable.ic_wheat2;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "Este es el" +  this.DESCRIPTION ;
         }
 
     }

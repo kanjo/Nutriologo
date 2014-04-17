@@ -1,8 +1,10 @@
 package com.kanjo.health.e_diet.app.UI;
 
 import android.app.Activity;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +17,18 @@ import com.kanjo.health.e_diet.app.R;
 
 import com.kanjo.health.e_diet.app.UI.dummy.DummyContent;
 import com.kanjo.health.e_diet.app.domain.HorariosFactory;
+import com.kanjo.health.e_diet.app.profile.DietProfileManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a ListGroupAlimentos of Items.
  * <p />
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
+
  * interface.
  */
 public class HorarioListFragment extends Fragment implements AbsListView.OnItemClickListener {
@@ -84,11 +87,7 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
         mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
 
-        List<String> mHorariosList = new ArrayList<String>();
-
-        for (String m : mHorariosArray) mHorariosList.add(m);
-
-        mAdapter = new AdapterHorarios(getActivity(),0, HorariosFactory.HORARIOS);
+        mAdapter = new AdapterHorarios(getActivity(),0, new HorariosFactory().buildHorarios());
     }
 
     @Override
@@ -110,7 +109,8 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            //mListener = (OnFragmentInteractionListener) activity;
+            //mListener = (OnFragmentIn
+            // teractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                 + " must implement OnFragmentInteractionListener");
@@ -126,16 +126,26 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-        }
+
+        FragmentManager f = this.getFragmentManager();
+
+        DietProfileManager p = new DietProfileManager();
+
+        p.createDiet();
+
+        if(f!=null)
+                f.beginTransaction().
+                replace(R.id.container, HorarioGroupAlimentosFragment.newInstance("DESAYUNO",p.desayuno)).
+                addToBackStack("GrupoAlimentos").
+                commit();
+
+
+
     }
 
     /**
      * The default content for this Fragment has a TextView that is shown when
-     * the list is empty. If you would like to change the text, call this method
+     * the ListGroupAlimentos is empty. If you would like to change the text, call this method
      * to supply the text it should use.
      */
     public void setEmptyText(CharSequence emptyText) {

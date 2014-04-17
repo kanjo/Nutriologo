@@ -1,6 +1,7 @@
 package com.kanjo.health.e_diet.app;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -57,6 +58,7 @@ public class MainActivity extends ActionBarActivity
         {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, HorarioListFragment.newInstance("",""))
+                    //.addToBackStack("Horario")
                     .commit();
         }else {
             fragmentManager.beginTransaction()
@@ -67,14 +69,20 @@ public class MainActivity extends ActionBarActivity
 
     public void onSectionAttached(int number) {
         switch (number) {
+            case 0:
+                mTitle = "Dieta";
+                break;
             case 1:
-                mTitle = getString(R.string.title_section1);
+                mTitle = "Perfil";
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                mTitle = "Historial";
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "Recomendaciones";
+                break;
+            case 4:
+                mTitle = "Contacto";
                 break;
         }
     }
@@ -86,6 +94,25 @@ public class MainActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager f = mNavigationDrawerFragment.getFragmentManager();
+        if(f!=null)
+        {
+            if(f.getBackStackEntryCount()>0)
+            {
+                FragmentTransaction ft = f.beginTransaction();
+                f.popBackStack();
+                ft.commit();
+            }
+            else
+            {
+                this.finish();
+            }
+        }
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -152,6 +179,8 @@ public class MainActivity extends ActionBarActivity
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+
+
     }
 
 }
