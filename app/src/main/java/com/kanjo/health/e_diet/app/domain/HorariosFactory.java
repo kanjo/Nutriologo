@@ -19,22 +19,6 @@ import java.util.Map;
 public  class HorariosFactory {
 
 
-    private  List<Horario> HORARIOS;
-
-
-
-    public List<Horario> buildHorarios()
-    {
-
-        HORARIOS = new ArrayList<Horario>();
-        HORARIOS.add(new DESAYUNO());
-        HORARIOS.add(new COLACION());
-        HORARIOS.add(new COMIDA());
-        HORARIOS.add(new COLACION());
-        HORARIOS.add(new CENA());
-        return  HORARIOS;
-    }
-
     public class Horario implements Serializable
     {
         public String DESCRIPTION;
@@ -42,12 +26,6 @@ public  class HorariosFactory {
         public int DRAWABLE;
         public List<GroupAlimentosFactory.GroupAlimento> ListGroupAlimentos;
     }
-
-
-
-
-
-
 
     public class DESAYUNO extends Horario  {
 

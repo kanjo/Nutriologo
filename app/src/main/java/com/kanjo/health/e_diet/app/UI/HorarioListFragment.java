@@ -19,9 +19,6 @@ import com.kanjo.health.e_diet.app.UI.dummy.DummyContent;
 import com.kanjo.health.e_diet.app.domain.HorariosFactory;
 import com.kanjo.health.e_diet.app.profile.DietProfileManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A fragment representing a ListGroupAlimentos of Items.
  * <p />
@@ -37,6 +34,7 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM_HORARIO = "HORARIO_PARAM";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -56,6 +54,12 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
      * Views.
      */
     private ListAdapter mAdapter;
+
+    /*
+    *Diet Profile we use schedule the portions of food ( group of food)
+    *
+     */
+    DietProfileManager dietProfileManager ;
 
     // TODO: Rename and change types of parameters
     public static HorarioListFragment newInstance(String param1, String param2) {
@@ -83,11 +87,12 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        //Create instantiate profileManager ;
+        dietProfileManager= new DietProfileManager();
+        //TODO : implement profile to construct the schedule
+        dietProfileManager.createDietHorarios();
 
-        mAdapter = new AdapterHorarios(getActivity(),0, new HorariosFactory().buildHorarios());
+        mAdapter = new AdapterHorarios(getActivity(),0, dietProfileManager.mHorarioList);
     }
 
     @Override
@@ -129,13 +134,13 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
 
         FragmentManager f = this.getFragmentManager();
 
-        DietProfileManager p = new DietProfileManager();
-
-        p.createDiet();
-
+        //Create the new fragment with the specific time
         if(f!=null)
                 f.beginTransaction().
-                replace(R.id.container, HorarioGroupAlimentosFragment.newInstance("DESAYUNO",p.desayuno)).
+                replace(R.id.container,
+                        HorarioGroupAlimentosFragment.newInstance(
+                                    dietProfileManager.mHorarioList.get(position).DESCRIPTION,
+                                    dietProfileManager.mHorarioList.get(position))).
                 addToBackStack("GrupoAlimentos").
                 commit();
 

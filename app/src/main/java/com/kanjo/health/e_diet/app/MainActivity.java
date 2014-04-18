@@ -58,7 +58,6 @@ public class MainActivity extends ActionBarActivity
         {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, HorarioListFragment.newInstance("",""))
-                    //.addToBackStack("Horario")
                     .commit();
         }else {
             fragmentManager.beginTransaction()
