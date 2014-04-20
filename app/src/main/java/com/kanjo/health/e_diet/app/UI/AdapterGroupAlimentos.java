@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.R;
 import com.kanjo.health.e_diet.app.domain.HorariosFactory;
-import com.kanjo.health.e_diet.app.profile.DietProfileManager;
-
-import java.util.List;
 
 
 /**

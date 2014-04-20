@@ -6,6 +6,7 @@ package com.kanjo.health.e_diet.app.domain;
 
 import android.support.v4.util.ArrayMap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,16 +27,20 @@ public  class GroupAlimentosFactory {
 
     public static GroupAlimentosFactory GRUPO_ALIMENTOS = new GroupAlimentosFactory();
 
-    public  class GroupAlimento
+    public static enum AlimentoType
+    {
+        ALIMENTO_PORCION, PLATILLO
+    }
+
+    public class GroupAlimento implements Serializable
     {
         public int quantity;
         public String description;
-        //TODO:AGREGAR TYPE
+        public AlimentoType alimentoType;
     }
 
     public class GroupPlatillo extends GroupAlimento
     {
-
         public List<Platillo> listPlatillo;
     }
 
@@ -54,6 +59,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildVerduras();
 
             description= "Verduras";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -67,6 +74,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildFrutas();
 
             description = "Frutas";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
 
@@ -82,6 +91,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildCerealesConGrasa();
 
             description = "Cereales con grasa";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -95,6 +106,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildCerealesSinGrasa();
 
             description = "Cereales sin grasa";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
 
@@ -154,6 +167,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
 
             description = "POA muy bajo aporte de grasa";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -168,6 +183,8 @@ public  class GroupAlimentosFactory {
                 listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
 
                 description = "POA bajo aporte de grasa";
+
+                alimentoType = AlimentoType.ALIMENTO_PORCION;
             }
 
     }
@@ -182,6 +199,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildLecheSemiDescremada();
 
             description = "Leche semidescremada";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -195,6 +214,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildAceitesSinProteina();
 
             description = "Aceites sin proteína";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
     }
 
@@ -207,6 +228,8 @@ public  class GroupAlimentosFactory {
             listAlimentoPorcion = GRUPO_ALIMENTOS.buildAceitesConProteina();
 
             description = "Aceites con proteína";
+
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
     }
 
@@ -481,16 +504,15 @@ public  class GroupAlimentosFactory {
             this.porcion = porcion;
 
         }
-        String descripcion;
+        public String descripcion;
 
         //La porcion se va a manejar como
         //una unidad de 1000 ejemplos :
         // una 1 taza = 1000 , 2 piezas = 2000,
         // 3/4 taza = 750 etc...
 
-        int porcion;
-        String tipoMedida;
-
+        public int porcion;
+        public String tipoMedida;
 
     }
 

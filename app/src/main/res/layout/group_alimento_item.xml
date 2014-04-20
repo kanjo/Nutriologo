@@ -3,8 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical">
 >
 
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/imgHorario"
+        android:src="@drawable/ic_coffee1"
+        android:maxHeight="64dp"
+        android:maxWidth="64dp"
+        />
 
 
 
@@ -13,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Verduras"
         android:id="@+id/titleGroupAlimento"
 
@@ -28,6 +37,8 @@
         android:text="1"
         android:id="@+id/titleQuantity"
         android:gravity="right"
+        android:textSize="26dp"
+        android:paddingRight="24dp"
         />
 
 </LinearLayout>
