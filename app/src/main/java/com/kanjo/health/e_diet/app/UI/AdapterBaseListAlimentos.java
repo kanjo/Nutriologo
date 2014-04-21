@@ -12,9 +12,12 @@ public class AdapterBaseListAlimentos extends ArrayAdapter <ExpandableBaseItem>{
 
     List<ExpandableBaseItem> listExpandableBaseItems;
 
+    int mLayout;
+
     public AdapterBaseListAlimentos(Context context, int resource, List<ExpandableBaseItem> items) {
         super(context, resource);
         listExpandableBaseItems = items;
+        mLayout = resource;
     }
 
 

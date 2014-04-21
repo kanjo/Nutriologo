@@ -27,7 +27,7 @@ public  class HorariosFactory {
         public List<GroupAlimentosFactory.GroupAlimento> ListGroupAlimentos;
     }
 
-    public class DESAYUNO extends Horario  {
+    public class DESAYUNO extends Horario implements Serializable {
 
         public DESAYUNO()
         {
@@ -43,7 +43,7 @@ public  class HorariosFactory {
         }
     }
 
-    public class COLACION extends Horario {
+    public class COLACION extends Horario implements Serializable {
         public COLACION()
         {
             this.DESCRIPTION = "Colación";
@@ -59,7 +59,7 @@ public  class HorariosFactory {
 
     }
 
-    public class COMIDA extends Horario {
+    public class COMIDA extends Horario implements Serializable {
 
         public COMIDA()
         {
@@ -77,7 +77,7 @@ public  class HorariosFactory {
 
     }
 
-    public class CENA extends Horario {
+    public class CENA extends Horario implements Serializable{
 
         public CENA()
         {
