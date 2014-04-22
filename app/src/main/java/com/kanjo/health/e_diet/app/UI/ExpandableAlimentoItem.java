@@ -13,6 +13,7 @@ public class ExpandableAlimentoItem extends ExpandableBaseItem{
                                   int imageResource, int collapsedHeight)
     {
         super(title,imageResource,collapsedHeight);
+        setExpanded(false);
         mQuantity=quantity;
         mTipoMedida = tipoMedida;
     }

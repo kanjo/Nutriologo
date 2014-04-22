@@ -16,8 +16,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import android.support.v4.view.ViewCompat;
-
 import com.kanjo.health.e_diet.app.R;
 
 import java.util.ArrayList;
@@ -34,7 +32,6 @@ public class ExpandingListViewAlimentos extends ListView {
     private List<View> mViewsToDraw = new ArrayList<View>();
 
     private int[] mTranslate;
-
 
     public ExpandingListViewAlimentos(Context context) {
         super(context);
@@ -67,13 +64,12 @@ public class ExpandingListViewAlimentos extends ListView {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             ExpandableBaseItem viewObject = (ExpandableBaseItem) getItemAtPosition(getPositionForView(view));
-            /*ExpandableListItem viewObject = (ExpandableListItem) getItemAtPosition(getPositionForView
-                    (view));*/
 
             if(!viewObject.isExpanded())
                 expandView(view);
             else
                 collapseView(view);
+
 
         }
     };
