@@ -15,7 +15,7 @@ public class AdapterBaseListAlimentos extends ArrayAdapter <ExpandableBaseItem>{
     int mLayout;
 
     public AdapterBaseListAlimentos(Context context, int resource, List<ExpandableBaseItem> items) {
-        super(context, resource);
+        super(context, resource,items);
         listExpandableBaseItems = items;
         mLayout = resource;
     }

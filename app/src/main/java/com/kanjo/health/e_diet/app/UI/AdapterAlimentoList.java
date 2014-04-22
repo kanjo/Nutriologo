@@ -13,9 +13,7 @@ import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.R;
 
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +27,8 @@ public class AdapterAlimentoList extends AdapterBaseListAlimentos {
     public AdapterAlimentoList(Context context,  List<ExpandableBaseItem> items) {
         super(context, R.layout.item_alimento,items);
     }
+
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
