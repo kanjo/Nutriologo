@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -32,6 +34,11 @@ public class HorarioView extends View {
     //Draw circle with color
     private Paint mCircleHourPaint;
 
+    //Bitmap to get the background
+    private Bitmap bitmap;
+
+    private Bitmap mScaledBitmap;
+
     public HorarioView(Context context) {
         super(context);
         init(null, 0);
@@ -50,46 +57,36 @@ public class HorarioView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
 
+        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setAntiAlias(true);
         mCirclePaint.setStyle(Paint.Style.STROKE);
         mCirclePaint.setColor(Color.argb(255,58,144,56));
-
-
-        DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
-        if(dm.densityDpi==DisplayMetrics.DENSITY_LOW||dm.densityDpi==DisplayMetrics.DENSITY_MEDIUM) {
-            mCirclePaint.setStrokeWidth(1);
-            mCirclePaint.setColor(Color.argb(255,58,144,56));
-            mCirclePaint.setShadowLayer(0.5f,0.5f,0.5f,Color.argb(255,145,169,142));
-            //setLayerType(LAYER_TYPE_SOFTWARE, mCirclePaint);
-        }
-        else
-        {
-            mCirclePaint.setStrokeWidth(2);
-            mCirclePaint.setShadowLayer(0.5f,0.5f,0.5f,Color.argb(255,145,169,142));
-
-        }
-
+        mCirclePaint.setStrokeWidth(1.5f);
+        //mCirclePaint.setShadowLayer(0.2f, 0.0f, 0.2f, Color.argb(255,145,169,142));
+        mCirclePaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
 
         mMarkerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mMarkerPaint.setStrokeWidth(2);
+        mMarkerPaint.setStrokeWidth(1.5f);
         mMarkerPaint.setStyle(Paint.Style.STROKE);
         mMarkerPaint.setColor(Color.argb(255,58,144,56));
-        mMarkerPaint.setShadowLayer(1,1,-1,Color.argb(255,145,169,142));
-
+        //mMarkerPaint.setShadowLayer(0.2f, 0.0f, 0.2f, Color.argb(255,145,169,142));
+        //mMarkerPaint.setShadowLayer(3,1.5f,1.5f,Color.argb(255,145,169,142));
+        mMarkerPaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
 
         mCircleHourPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCircleHourPaint.setColor(Color.argb(255,237,241,188));
         mCircleHourPaint.setStyle(Paint.Style.FILL);
-        //mCircleHourPaint.setAlpha(25);
-
 
         mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(Color.DKGRAY);
         mTextPaint.setFakeBoldText(true);
         mTextPaint.setSubpixelText(true);
         mTextPaint.setTextSize(55);
-        mTextPaint.setShadowLayer(1,1,1,Color.argb(255,145,169,142));
+        mTextPaint.setShadowLayer(3,1.5f,1.5f,Color.argb(255,145,169,142));
+
+
 
 
     }
@@ -97,6 +94,9 @@ public class HorarioView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.puntitos);
+        mScaledBitmap = Bitmap.createScaledBitmap(bitmap,getWidth(),getHeight(),true);
+        canvas.drawBitmap(mScaledBitmap,0,0,null);
 
         //   The view will be drawn always in portrait mode
 
