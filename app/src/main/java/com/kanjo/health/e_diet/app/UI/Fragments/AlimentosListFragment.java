@@ -40,7 +40,7 @@ public class AlimentosListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private final int CELL_DEFAULT_HEIGHT = 150;
+    private final int CELL_DEFAULT_HEIGHT = 200;
 
     private List<ExpandableBaseItem> mData ;
 

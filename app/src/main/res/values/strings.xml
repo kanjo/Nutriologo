@@ -10,5 +10,11 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_horario_detail">HorarioDetailActivity</string>
+    <string name="title_activity_test">Test</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="timetable">Horario</string>
+    <string name="title_activity_horario_test">HorarioTest</string>
+    <string name="title_activity_pager_test">PagerTest</string>
 
 </resources>

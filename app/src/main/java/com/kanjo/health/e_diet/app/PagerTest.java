@@ -1,26 +1,47 @@
 package com.kanjo.health.e_diet.app;
 
-import android.app.Activity;
+import java.util.Locale;
+
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.UI.Fragments.HorarioListFragment;
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class PagerTest extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+{
+
+    /**
+     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * fragments for each of the sections. We use a
+     * {@link FragmentPagerAdapter} derivative, which will keep every
+     * loaded fragment in memory. If this becomes too memory intensive, it
+     * may be best to switch to a
+     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     */
+    SectionsPagerAdapter mSectionsPagerAdapter;
+
+    /**
+     * The {@link ViewPager} that will host the section contents.
+     */
+    ViewPager mViewPager;
+
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -35,7 +56,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pager_test);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -45,7 +66,19 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
+
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
     }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -53,9 +86,9 @@ public class MainActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         if(position==0)
         {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, HorarioListFragment.newInstance("",""))
-                    .commit();
+            /*fragmentManager.beginTransaction()
+                    .replace(R.id.container, HorarioListFragment.newInstance("", ""))
+                    .commit();*/
         }else {
             Intent i  = new Intent(this,PagerTest.class);
             startActivity(i);
@@ -66,25 +99,6 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 0:
-                mTitle = "Dieta";
-                break;
-            case 1:
-                mTitle = "Perfil";
-                break;
-            case 2:
-                mTitle = "Historial";
-                break;
-            case 3:
-                mTitle = "Recomendaciones";
-                break;
-            case 4:
-                mTitle = "Contacto";
-                break;
-        }
-    }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -95,26 +109,8 @@ public class MainActivity extends ActionBarActivity
 
 
     @Override
-    public void onBackPressed() {
-        FragmentManager f = mNavigationDrawerFragment.getFragmentManager();
-        if(f!=null)
-        {
-            if(f.getBackStackEntryCount()>0)
-            {
-                FragmentTransaction ft = f.beginTransaction();
-                f.popBackStack();
-                ft.commit();
-            }
-            else
-            {
-                this.finish();
-            }
-        }
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
@@ -123,6 +119,7 @@ public class MainActivity extends ActionBarActivity
             restoreActionBar();
             return true;
         }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -136,6 +133,46 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    
+
+    /**
+     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+     * one of the sections/tabs/pages.
+     */
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            Locale l = Locale.getDefault();
+            switch (position) {
+                case 0:
+                    return getString(R.string.title_section1).toUpperCase(l);
+                case 1:
+                    return getString(R.string.title_section2).toUpperCase(l);
+                case 2:
+                    return getString(R.string.title_section3).toUpperCase(l);
+            }
+            return null;
+        }
     }
 
     /**
@@ -166,20 +203,14 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            /*View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
+            return rootView;*/
+            HorarioView mHorarioView = new HorarioView(getActivity());
+            return mHorarioView;
+
         }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-
-
     }
 
 }

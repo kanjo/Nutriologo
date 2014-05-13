@@ -18,7 +18,7 @@ import java.util.Map;
 
 //TODO: Revisar como se quitan los typos
 @SuppressWarnings("All")
-public  class GroupAlimentosFactory {
+public  class GroupAlimentosFactory implements Serializable {
 
     public GroupAlimentosFactory()
     {
