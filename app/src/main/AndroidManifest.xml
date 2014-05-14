@@ -17,8 +17,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kanjo.health.e_diet.app.GruopFoodActivity"
-            android:label="@string/title_activity_gruop_food" >
+            android:name="com.kanjo.health.e_diet.app.GroupFoodActivity"
+            android:label="Group Activity" >
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kanjo.health.e_diet.app.PagerTest"/>
         </activity>
     </application>
 

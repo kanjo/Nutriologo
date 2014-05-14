@@ -1,10 +1,13 @@
 package com.kanjo.health.e_diet.app.UI.Fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -63,6 +66,8 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
 
         mAdapter = new AdapterGroupAlimentos(getActivity(),R.layout.group_alimento_item,mHorario);
 
+        setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -80,6 +85,14 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
 
         mListView.setTextFilterEnabled(true);
 
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.HONEYCOMB)
+        {
+            if(NavUtils.getParentActivityIntent(getActivity())!=null)
+            {
+                getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
         return view;
     }
 
@@ -96,5 +109,18 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
                     commit();
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home :
+                if(NavUtils.getParentActivityIntent(getActivity())!=null)
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                return  true;
+            default:
+                return  super.onOptionsItemSelected(item);
+
+        }
     }
 }

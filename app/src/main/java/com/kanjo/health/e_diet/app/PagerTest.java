@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.UI.Fragments.HorarioListFragment;
+import com.kanjo.health.e_diet.app.domain.HorariosFactory;
 
 
 public class PagerTest extends ActionBarActivity
@@ -197,6 +198,8 @@ public class PagerTest extends ActionBarActivity
             return fragment;
         }
 
+        HorarioView mHorarioView;
+
         public PlaceholderFragment() {
         }
 
@@ -207,7 +210,15 @@ public class PagerTest extends ActionBarActivity
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;*/
-            HorarioView mHorarioView = new HorarioView(getActivity());
+            mHorarioView = new HorarioView(getActivity());
+            mHorarioView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent mIntentHorarioGroup = new Intent(getActivity(),GroupFoodActivity.class);
+                    mIntentHorarioGroup.putExtra("testParam","Hey this the new param");
+                    startActivity(mIntentHorarioGroup);
+                }
+            });
             return  mHorarioView;
 
 
