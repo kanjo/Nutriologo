@@ -6,7 +6,6 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.kanjo.health.e_diet.app.PagerTest"
@@ -17,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
+        <activity
+            android:name="com.kanjo.health.e_diet.app.GruopFoodActivity"
+            android:label="@string/title_activity_gruop_food" >
+        </activity>
     </application>
 
 </manifest>

@@ -111,6 +111,7 @@ public class NavigationDrawerFragment extends Fragment {
                         "Contacto"
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerListView.setBackgroundResource(R.drawable.degradado);
         return mDrawerListView;
     }
 

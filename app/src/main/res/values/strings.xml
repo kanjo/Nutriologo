@@ -16,5 +16,6 @@
     <string name="timetable">Horario</string>
     <string name="title_activity_horario_test">HorarioTest</string>
     <string name="title_activity_pager_test">PagerTest</string>
+    <string name="title_activity_gruop_food">GruopFoodActivity</string>
 
 </resources>

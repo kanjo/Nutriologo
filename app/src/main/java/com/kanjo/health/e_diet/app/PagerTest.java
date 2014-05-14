@@ -90,8 +90,8 @@ public class PagerTest extends ActionBarActivity
                     .replace(R.id.container, HorarioListFragment.newInstance("", ""))
                     .commit();*/
         }else {
-            Intent i  = new Intent(this,PagerTest.class);
-            startActivity(i);
+            //Intent i  = new Intent(this,PagerTest.class);
+            //startActivity(i);
 
             /*fragmentManager.beginTransaction()
                     .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -208,7 +208,8 @@ public class PagerTest extends ActionBarActivity
             textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;*/
             HorarioView mHorarioView = new HorarioView(getActivity());
-            return mHorarioView;
+            return  mHorarioView;
+
 
         }
     }
