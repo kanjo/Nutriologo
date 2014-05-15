@@ -50,7 +50,7 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
         HorarioGroupAlimentosFragment fragment = new HorarioGroupAlimentosFragment();
         Bundle args = new Bundle();
         //args.putString(,param1);
-        args.putSerializable(PARAM_HORARIO,horario);
+        args.putParcelable(PARAM_HORARIO,horario);
         fragment.setArguments(args);
         return fragment;
     }
@@ -63,7 +63,7 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
 
         if (getArguments() != null) {
              //mHorarioSelected= getArguments().getString(PARAM_HORARIO);
-             mHorario = (HorariosFactory.Horario)getArguments().getSerializable(PARAM_HORARIO);
+             mHorario = (HorariosFactory.Horario)getArguments().getParcelable(PARAM_HORARIO);
         }
 
         mAdapter = new AdapterGroupAlimentos(getActivity(),R.layout.group_alimento_item,mHorario);

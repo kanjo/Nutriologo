@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mainRelativeLayout"
+                android:background="@color/background_color">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/photo"
+        android:padding="16dp"
+
+        android:id="@+id/idphotoImageView"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameTitle"
+        android:text="Nombre : "
+        android:layout_toRightOf="@+id/idphotoImageView"
+        android:layout_alignTop="@id/idphotoImageView"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dias : 0"
+        android:id="@+id/titleDaysInDiet"
+        android:layout_toRightOf="@+id/idphotoImageView"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_alignBottom="@+id/idphotoImageView"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#fff"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Kgs.: 0"
+        android:layout_toRightOf="@+id/titleDaysInDiet"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:layout_alignBottom="@+id/idphotoImageView"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#fff"/>
+
+
+
+</RelativeLayout>

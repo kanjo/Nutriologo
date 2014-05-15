@@ -4,6 +4,8 @@ package com.kanjo.health.e_diet.app.domain;
  * Created by JARP on 4/10/14.
  */
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.util.ArrayMap;
 
 import java.io.Serializable;
@@ -18,35 +20,11 @@ import java.util.Map;
 
 //TODO: Revisar como se quitan los typos
 @SuppressWarnings("All")
-public  class GroupAlimentosFactory implements Serializable {
+public  class GroupAlimentosFactory  {
 
     public GroupAlimentosFactory()
     {
         build();
-    }
-
-    public static GroupAlimentosFactory GRUPO_ALIMENTOS = new GroupAlimentosFactory();
-
-    public static enum AlimentoType
-    {
-        ALIMENTO_PORCION, PLATILLO
-    }
-
-    public class GroupAlimento implements Serializable
-    {
-        public int quantity;
-        public String description;
-        public AlimentoType alimentoType;
-    }
-
-    public class GroupPlatillo extends GroupAlimento
-    {
-        public List<Platillo> listPlatillo;
-    }
-
-    public  class GroupAlimentoPorcion extends GroupAlimento
-    {
-        public List<AlimentoPorcion> listAlimentoPorcion;
     }
 
     public  class VERDURAS extends GroupAlimentoPorcion
@@ -176,16 +154,16 @@ public  class GroupAlimentosFactory implements Serializable {
     public class POABajoAporteGrasa extends GroupAlimentoPorcion
     {
 
-            public POABajoAporteGrasa()
-            {
-                listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+        public POABajoAporteGrasa()
+        {
+            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
 
-                listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
+            listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
 
-                description = "POA bajo aporte de grasa";
+            description = "POA bajo aporte de grasa";
 
-                alimentoType = AlimentoType.ALIMENTO_PORCION;
-            }
+            alimentoType = AlimentoType.ALIMENTO_PORCION;
+        }
 
     }
 
@@ -232,6 +210,9 @@ public  class GroupAlimentosFactory implements Serializable {
             alimentoType = AlimentoType.ALIMENTO_PORCION;
         }
     }
+
+
+    public static GroupAlimentosFactory GRUPO_ALIMENTOS = new GroupAlimentosFactory();
 
     public Map<String, List<AlimentoPorcion>> listGrupoAlimentos;
 
@@ -478,43 +459,6 @@ public  class GroupAlimentosFactory implements Serializable {
         return  aceiteConProteina;
     }
 
-
-
-    public class Platillo
-    {
-
-        public Platillo(String descripcion, String receta)
-        {
-            this.descripcion=descripcion;
-            this.receta=receta;
-        }
-
-
-        public String descripcion;
-        public String receta;
-    }
-
-    public class AlimentoPorcion
-    {
-
-        public AlimentoPorcion(String descripcion,String medida, int porcion)
-        {
-            this.descripcion=descripcion;
-            this.tipoMedida=medida;
-            this.porcion = porcion;
-
-        }
-        public String descripcion;
-
-        //La porcion se va a manejar como
-        //una unidad de 1000 ejemplos :
-        // una 1 taza = 1000 , 2 piezas = 2000,
-        // 3/4 taza = 750 etc...
-
-        public int porcion;
-        public String tipoMedida;
-
-    }
 
     @SuppressWarnings("ALL")
     public static class TipoMedida

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.kanjo.health.e_diet.app.HorarioView
+    <com.kanjo.health.e_diet.app.UI.CustomViews.HorarioView
         android:background="#ccc"
         android:layout_width="300dp"
         android:layout_height="300dp"

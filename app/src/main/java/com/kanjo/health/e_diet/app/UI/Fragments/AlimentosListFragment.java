@@ -18,7 +18,13 @@ import com.kanjo.health.e_diet.app.UI.ExpandableAlimentoItem;
 import com.kanjo.health.e_diet.app.UI.ExpandableBaseItem;
 import com.kanjo.health.e_diet.app.UI.ExpandablePlatilloItem;
 import com.kanjo.health.e_diet.app.UI.ExpandingListViewAlimentos;
+import com.kanjo.health.e_diet.app.domain.AlimentoPorcion;
+import com.kanjo.health.e_diet.app.domain.AlimentoType;
+import com.kanjo.health.e_diet.app.domain.GroupAlimento;
+import com.kanjo.health.e_diet.app.domain.GroupAlimentoPorcion;
 import com.kanjo.health.e_diet.app.domain.GroupAlimentosFactory;
+import com.kanjo.health.e_diet.app.domain.GroupPlatillo;
+import com.kanjo.health.e_diet.app.domain.Platillo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +57,7 @@ public class AlimentosListFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private GroupAlimentosFactory.GroupAlimento mGroupAlimento;
+    private GroupAlimento mGroupAlimento;
 
     private ExpandingListViewAlimentos mListView ;
 
@@ -65,12 +71,12 @@ public class AlimentosListFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static AlimentosListFragment newInstance(String param1, String param2,
-                                                    GroupAlimentosFactory.GroupAlimento grupoAlimento) {
+                                                    GroupAlimento grupoAlimento) {
         AlimentosListFragment fragment = new AlimentosListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        args.putSerializable(ARG_PARAM3, grupoAlimento);
+        args.putParcelable(ARG_PARAM3, grupoAlimento);
         fragment.setArguments(args);
         return fragment;
     }
@@ -97,9 +103,10 @@ public class AlimentosListFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-            mGroupAlimento = (GroupAlimentosFactory.GroupAlimento) getArguments().getSerializable(ARG_PARAM3);
+            mGroupAlimento = (GroupAlimento) getArguments().getParcelable(ARG_PARAM3);
 
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -124,6 +131,7 @@ public class AlimentosListFragment extends Fragment {
                 getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
+
         return v;
     }
 
@@ -131,10 +139,11 @@ public class AlimentosListFragment extends Fragment {
     {
         mData = new ArrayList<ExpandableBaseItem>();
 
-        if(mGroupAlimento.alimentoType == GroupAlimentosFactory.AlimentoType.ALIMENTO_PORCION) {
-            GroupAlimentosFactory.GroupAlimentoPorcion alimentoList =
-                    (GroupAlimentosFactory.GroupAlimentoPorcion) mGroupAlimento;
-            for ( GroupAlimentosFactory.AlimentoPorcion item : alimentoList.listAlimentoPorcion)
+
+        if(mGroupAlimento.alimentoType == AlimentoType.ALIMENTO_PORCION) {
+            GroupAlimentoPorcion alimentoList =
+                    (GroupAlimentoPorcion) mGroupAlimento;
+            for ( AlimentoPorcion item : alimentoList.listAlimentoPorcion)
                 mData.add(
                             new ExpandableAlimentoItem(item.descripcion,
                                                        String.valueOf(item.porcion),
@@ -145,9 +154,9 @@ public class AlimentosListFragment extends Fragment {
 
         }
         else {
-            GroupAlimentosFactory.GroupPlatillo platilloList =
-                    (GroupAlimentosFactory.GroupPlatillo) mGroupAlimento;
-            for(GroupAlimentosFactory.Platillo item : platilloList.listPlatillo)
+            GroupPlatillo platilloList =
+                    (GroupPlatillo) mGroupAlimento;
+            for(Platillo item : platilloList.listPlatillo)
                 mData.add(
                             new ExpandablePlatilloItem(item.descripcion,
                                                        R.drawable.test_guacamole_salad,

@@ -3,6 +3,8 @@ package com.kanjo.health.e_diet.app.domain;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.util.ArrayMap;
 
 import com.kanjo.health.e_diet.app.R;
@@ -19,15 +21,25 @@ import java.util.Map;
 public  class HorariosFactory {
 
 
-    public class Horario implements Serializable
+    public class Horario implements Parcelable
     {
         public String DESCRIPTION;
         public Uri mImageFile ;
         public int DRAWABLE;
-        public List<GroupAlimentosFactory.GroupAlimento> ListGroupAlimentos;
+        public List<GroupAlimento> ListGroupAlimentos;
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+
+        }
     }
 
-    public class DESAYUNO extends Horario implements Serializable {
+    public class DESAYUNO extends Horario  {
 
         public DESAYUNO()
         {
@@ -43,7 +55,7 @@ public  class HorariosFactory {
         }
     }
 
-    public class COLACION extends Horario implements Serializable {
+    public class COLACION extends Horario  {
         public COLACION()
         {
             this.DESCRIPTION = "Colación";
@@ -59,7 +71,7 @@ public  class HorariosFactory {
 
     }
 
-    public class COMIDA extends Horario implements Serializable {
+    public class COMIDA extends Horario  {
 
         public COMIDA()
         {
@@ -77,7 +89,7 @@ public  class HorariosFactory {
 
     }
 
-    public class CENA extends Horario implements Serializable{
+    public class CENA extends Horario {
 
         public CENA()
         {

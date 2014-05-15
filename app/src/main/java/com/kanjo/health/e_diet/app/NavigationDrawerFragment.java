@@ -22,6 +22,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.zip.Inflater;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -93,12 +95,15 @@ public class NavigationDrawerFragment extends Fragment {
             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
+        View v = LayoutInflater.from(getActivity()).inflate(R.layout.header_list_nav_draw,null);
+        mDrawerListView.addHeaderView(v);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
+        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
@@ -110,8 +115,9 @@ public class NavigationDrawerFragment extends Fragment {
                         "Recomendaciones",
                         "Contacto"
                 }));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
         mDrawerListView.setBackgroundResource(R.drawable.degradado);
+
         return mDrawerListView;
     }
 

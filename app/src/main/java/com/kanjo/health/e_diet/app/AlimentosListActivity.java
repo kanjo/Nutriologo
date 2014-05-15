@@ -24,6 +24,7 @@ public class AlimentosListActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
         initProfile();
+
         return AlimentosListFragment.newInstance("","",dietProfileManager.mHorarioList.get(0).ListGroupAlimentos.get(0));
     }
 }

@@ -2,6 +2,7 @@ package com.kanjo.health.e_diet.app.profile;
 
 import android.support.v4.util.ArrayMap;
 
+import com.kanjo.health.e_diet.app.domain.GroupAlimento;
 import com.kanjo.health.e_diet.app.domain.GroupAlimentosFactory;
 import com.kanjo.health.e_diet.app.domain.HorariosFactory;
 
@@ -58,7 +59,7 @@ public class DietProfileManager {
     {
         desayuno = horariosFactory.new DESAYUNO();
 
-        desayuno.ListGroupAlimentos = new ArrayList<GroupAlimentosFactory.GroupAlimento>();
+        desayuno.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
@@ -106,7 +107,7 @@ public class DietProfileManager {
 
         medioDia = horariosFactory. new COLACION();
 
-        medioDia.ListGroupAlimentos = new ArrayList<GroupAlimentosFactory.GroupAlimento>();
+        medioDia.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
         mVerduras.quantity =1;
@@ -126,7 +127,7 @@ public class DietProfileManager {
 
         comida = horariosFactory. new COMIDA();
 
-        comida.ListGroupAlimentos = new ArrayList<GroupAlimentosFactory.GroupAlimento>();
+        comida.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
@@ -161,7 +162,7 @@ public class DietProfileManager {
 
         mediaTarde = horariosFactory. new COLACION();
 
-        mediaTarde.ListGroupAlimentos = new ArrayList<GroupAlimentosFactory.GroupAlimento>();
+        mediaTarde.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
@@ -181,7 +182,7 @@ public class DietProfileManager {
     private void createCena() {
 
         cena = horariosFactory.new CENA();
-        cena.ListGroupAlimentos = new ArrayList<GroupAlimentosFactory.GroupAlimento>();
+        cena.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Leche*/
         GroupAlimentosFactory.Leche mLeche = factoryGrupoAlimentos. new Leche();
