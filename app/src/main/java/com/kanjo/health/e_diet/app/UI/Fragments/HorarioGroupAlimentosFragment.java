@@ -1,6 +1,7 @@
 package com.kanjo.health.e_diet.app.UI.Fragments;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.AdapterView;
 
 import android.widget.ListAdapter;
 
+import com.kanjo.health.e_diet.app.AlimentosListActivity;
 import com.kanjo.health.e_diet.app.R;
 import com.kanjo.health.e_diet.app.UI.AdapterGroupAlimentos;
 import com.kanjo.health.e_diet.app.domain.HorariosFactory;
@@ -99,6 +101,11 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+        Intent intentAlimentosListActivity = new Intent(getActivity(), AlimentosListActivity.class);
+
+        startActivity(intentAlimentosListActivity);
+
+        /*
         FragmentManager f = this.getFragmentManager();
         //Create the new fragment with the specify aliment of group
         if(f!=null)
@@ -107,7 +114,7 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
                             AlimentosListFragment.newInstance("","",mHorario.ListGroupAlimentos.get(i))).
                     addToBackStack("GrupoAlimento").
                     commit();
-
+        */
 
     }
 

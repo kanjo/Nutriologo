@@ -19,8 +19,16 @@
         <activity
             android:name="com.kanjo.health.e_diet.app.GroupFoodActivity"
             android:label="Group Activity" >
-            <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kanjo.health.e_diet.app.PagerTest"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kanjo.health.e_diet.app.PagerTest" />
+        </activity>
+        <activity
+            android:name=".AlimentosListActivity"
+            android:label="@string/title_activity_alimentos" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kanjo.health.e_diet.app.GroupFoodActivity" />
         </activity>
     </application>
 
