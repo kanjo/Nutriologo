@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Nutriologo.iml" filepath="$PROJECT_DIR$/Nutriologo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/e-Diet.iml" filepath="$PROJECT_DIR$/e-Diet.iml" />
     </modules>
