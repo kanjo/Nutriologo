@@ -50,6 +50,7 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
         HorarioGroupAlimentosFragment fragment = new HorarioGroupAlimentosFragment();
         Bundle args = new Bundle();
         //args.putString(,param1);
+        //New Line
         args.putParcelable(PARAM_HORARIO,horario);
         fragment.setArguments(args);
         return fragment;
