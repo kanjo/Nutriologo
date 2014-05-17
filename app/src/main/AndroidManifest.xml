@@ -9,7 +9,7 @@
 
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.kanjo.health.e_diet.app.PagerTest"
+            android:name=".PagerMainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             android:label="Group Activity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kanjo.health.e_diet.app.PagerTest" />
+                android:value="com.kanjo.health.e_diet.app.PagerMainActivity" />
         </activity>
         <activity
             android:name=".AlimentosListActivity"

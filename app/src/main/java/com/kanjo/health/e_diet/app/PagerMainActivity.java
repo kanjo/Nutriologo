@@ -18,9 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kanjo.health.e_diet.app.UI.CustomViews.HorarioView;
+import com.kanjo.health.e_diet.app.UI.ZoomOutPageTransformer;
 
 
-public class PagerTest extends ActionBarActivity
+public class PagerMainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
 
@@ -73,6 +74,7 @@ public class PagerTest extends ActionBarActivity
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
     }
 
@@ -202,19 +204,18 @@ public class PagerTest extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            /*View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;*/
             mHorarioView = new HorarioView(getActivity());
-            mHorarioView.setOnClickListener(new View.OnClickListener() {
+            mHorarioView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View view) {
+                public boolean onLongClick(View view) {
                     Intent mIntentHorarioGroup = new Intent(getActivity(),GroupFoodActivity.class);
                     mIntentHorarioGroup.putExtra("testParam","Hey this the new param");
                     startActivity(mIntentHorarioGroup);
+                    return true;
+
                 }
             });
+
             return  mHorarioView;
 
 

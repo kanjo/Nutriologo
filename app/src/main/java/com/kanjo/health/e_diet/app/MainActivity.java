@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, HorarioListFragment.newInstance("",""))
                     .commit();
         }else {
-            Intent i  = new Intent(this,PagerTest.class);
+            Intent i  = new Intent(this,PagerMainActivity.class);
             startActivity(i);
 
             /*fragmentManager.beginTransaction()
