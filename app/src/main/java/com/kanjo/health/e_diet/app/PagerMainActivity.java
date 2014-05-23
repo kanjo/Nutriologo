@@ -184,6 +184,8 @@ public class PagerMainActivity extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private int sectionNumber;
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -204,7 +206,14 @@ public class PagerMainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            mHorarioView = new HorarioView(getActivity());
+
+
+            Bundle mBundle = getArguments();
+
+            if(mBundle!=null)
+                this.sectionNumber= mBundle.getInt(ARG_SECTION_NUMBER);
+
+            mHorarioView = new HorarioView(getActivity(),this.sectionNumber);
             mHorarioView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {

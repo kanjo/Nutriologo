@@ -43,9 +43,17 @@ public class HorarioView extends View {
 
     private Bitmap mScaledBitmap;
 
+    private int selectedImage;
+
     public HorarioView(Context context) {
         super(context);
         init(null, 0);
+    }
+
+    public HorarioView(Context context,int image) {
+        super(context);
+        init(null, 0);
+        this.selectedImage=image;
     }
 
     public HorarioView(Context context, AttributeSet attrs) {
@@ -61,26 +69,30 @@ public class HorarioView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
 
-        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        //this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setAntiAlias(true);
         mCirclePaint.setStyle(Paint.Style.STROKE);
-        mCirclePaint.setColor(Color.argb(255,58,144,56));
-        mCirclePaint.setStrokeWidth(1.5f);
+        //mCirclePaint.setColor(Color.argb(255,58,144,56));
+        mCirclePaint.setColor(Color.argb(255,64,127,64));
+        mCirclePaint.setStrokeWidth(1.8f);
         //mCirclePaint.setShadowLayer(0.2f, 0.0f, 0.2f, Color.argb(255,145,169,142));
-        mCirclePaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
+        //mCirclePaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
+        mCirclePaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,64,127,64));
 
         mMarkerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mMarkerPaint.setStrokeWidth(1.5f);
+        mMarkerPaint.setStrokeWidth(1.8f);
         mMarkerPaint.setStyle(Paint.Style.STROKE);
-        mMarkerPaint.setColor(Color.argb(255,58,144,56));
+        //mMarkerPaint.setColor(Color.argb(255,58,144,56));
+        mMarkerPaint.setColor(Color.argb(255,64,127,64));
         //mMarkerPaint.setShadowLayer(0.2f, 0.0f, 0.2f, Color.argb(255,145,169,142));
         //mMarkerPaint.setShadowLayer(3,1.5f,1.5f,Color.argb(255,145,169,142));
-        mMarkerPaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
+        //mMarkerPaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,145,169,142));
+        mMarkerPaint.setShadowLayer(.7f,.7f,.7f,Color.argb(255,64,127,64));
 
         mCircleHourPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mCircleHourPaint.setColor(Color.argb(255,187,230,57));
+        mCircleHourPaint.setColor(Color.argb(125,64,127,64));
 
         //153 204   0
         //129,188,0
@@ -92,14 +104,18 @@ public class HorarioView extends View {
         mTextPaint.setSubpixelText(true);
         mTextPaint.setTextSize(55);
 
-        mTextPaint.setShadowLayer(3,1.5f,1.5f,Color.argb(255,145,169,142));
+        mTextPaint.setShadowLayer(3,1.5f,1.5f,Color.argb(255,64,127,64));
 
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
 
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.puntitos);
+        if(selectedImage==1)
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.v_13554527503_e3cdceb311_c);
+
+        if(selectedImage>1)
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.v_7837525640_d51512bd08);
         mScaledBitmap = Bitmap.createScaledBitmap(bitmap,getWidth(),getHeight(),true);
         canvas.drawBitmap(mScaledBitmap,0,0,null);
 
@@ -218,6 +234,7 @@ public class HorarioView extends View {
         canvas.save();
 
         canvas.drawText("8:00",width/2 -75,height/2+25 ,mTextPaint);
+        canvas.drawText("A.M.",width/2 -75,height/2+75 ,mTextPaint);
         canvas.save();
         canvas.restore();
     }
