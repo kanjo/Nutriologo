@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 
 import com.kanjo.health.e_diet.app.UI.CustomViews.HorarioView;
 import com.kanjo.health.e_diet.app.UI.ZoomOutPageTransformer;
+import com.kanjo.health.e_diet.app.domain.Horario;
+import com.kanjo.health.e_diet.app.profile.DietProfileManager;
 
 
 public class PagerMainActivity extends ActionBarActivity
@@ -51,11 +53,18 @@ public class PagerMainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    public final static String KEY_HORARIO = "MAIN_PAGER_KEY_HORARIO";
+
+    private DietProfileManager dietProfileManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager_test);
 
+        //TODO : implement the DietProfile
+        dietProfileManager= new DietProfileManager();
+        //TODO : implement profile to construct the schedule
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -70,11 +79,14 @@ public class PagerMainActivity extends ActionBarActivity
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter.setProfile(dietProfileManager);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+
 
     }
 
@@ -83,19 +95,8 @@ public class PagerMainActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if(position==0)
-        {
-            /*fragmentManager.beginTransaction()
-                    .replace(R.id.container, HorarioListFragment.newInstance("", ""))
-                    .commit();*/
-        }else {
-            //Intent i  = new Intent(this,PagerTest.class);
-            //startActivity(i);
 
-            /*fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                    .commit();*/
-        }
+        //TODO: implement the menu
     }
 
 
@@ -146,17 +147,30 @@ public class PagerMainActivity extends ActionBarActivity
             super(fm);
         }
 
+        public DietProfileManager getProfile() {
+            return mProfile;
+        }
+
+        public void setProfile(DietProfileManager mProfile) {
+            this.mProfile = mProfile;
+        }
+
+        private DietProfileManager mProfile ;
+
+        //TODO: implement the Profile
+
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position + 1, mProfile.getHorario(position));
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            //return 3;
+            return mProfile.getAllHorarios().size();
         }
 
         @Override
@@ -190,15 +204,17 @@ public class PagerMainActivity extends ActionBarActivity
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber,Horario horario) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putParcelable(PagerMainActivity.KEY_HORARIO, horario);
             fragment.setArguments(args);
             return fragment;
         }
 
         HorarioView mHorarioView;
+        Horario mHorario=null;
 
         public PlaceholderFragment() {
         }
@@ -210,15 +226,19 @@ public class PagerMainActivity extends ActionBarActivity
 
             Bundle mBundle = getArguments();
 
-            if(mBundle!=null)
-                this.sectionNumber= mBundle.getInt(ARG_SECTION_NUMBER);
+
+            if(mBundle!=null) {
+                this.sectionNumber = mBundle.getInt(ARG_SECTION_NUMBER);
+                mHorario = mBundle.getParcelable(PagerMainActivity.KEY_HORARIO);
+            }
 
             mHorarioView = new HorarioView(getActivity(),this.sectionNumber);
             mHorarioView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     Intent mIntentHorarioGroup = new Intent(getActivity(),GroupFoodActivity.class);
-                    mIntentHorarioGroup.putExtra("testParam","Hey this the new param");
+                    if(mHorario!=null)
+                        mIntentHorarioGroup.putExtra(PagerMainActivity.KEY_HORARIO,mHorario);
                     startActivity(mIntentHorarioGroup);
                     return true;
 

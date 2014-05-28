@@ -8,20 +8,20 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.R;
-import com.kanjo.health.e_diet.app.domain.HorariosFactory;
+import com.kanjo.health.e_diet.app.domain.Horario;
 
 
 /**
  * Created by JARP on 4/9/14.
  */
 //TODO: para efectos de DEMO solo se va a presentar el del desayuno
-public class AdapterGroupAlimentos extends ArrayAdapter<HorariosFactory.Horario> {
+public class AdapterGroupAlimentos extends ArrayAdapter<Horario> {
 
     Context mContext;
 
-    HorariosFactory.Horario mHorario;
+    Horario mHorario;
 
-    public AdapterGroupAlimentos(Context context, int resource, HorariosFactory.Horario horario) {
+    public AdapterGroupAlimentos(Context context, int resource, Horario horario) {
 
         super(context, R.layout.horario_item);
         mContext = context;
@@ -51,16 +51,16 @@ public class AdapterGroupAlimentos extends ArrayAdapter<HorariosFactory.Horario>
 
             mViewHolder.mQuantity =(TextView) mHorarioView.findViewById(R.id.titleQuantity);
 
-            mViewHolder.mTitle.setText(mHorario.ListGroupAlimentos.get(position).description);
+            mViewHolder.mTitle.setText(mHorario.ListGroupAlimentos.get(position).mDescription);
 
-            mViewHolder.mQuantity.setText(String.valueOf(mHorario.ListGroupAlimentos.get(position).quantity));
+            mViewHolder.mQuantity.setText(String.valueOf(mHorario.ListGroupAlimentos.get(position).mQuantity));
 
             mHorarioView.setTag(mViewHolder);
         }
 
         ViewHolder holder = (ViewHolder) mHorarioView.getTag();
 
-        holder.mTitle.setText(mHorario.ListGroupAlimentos.get(position).description);
+        holder.mTitle.setText(mHorario.ListGroupAlimentos.get(position).mDescription);
 
         holder.mQuantity.setText("1");
 

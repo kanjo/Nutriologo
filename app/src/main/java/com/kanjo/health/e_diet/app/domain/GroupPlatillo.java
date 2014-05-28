@@ -1,5 +1,6 @@
 package com.kanjo.health.e_diet.app.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,5 +8,8 @@ import java.util.List;
  */
 public class GroupPlatillo extends GroupAlimento {
 
-    public List<Platillo> listPlatillo;
+    public GroupPlatillo()
+    {
+        mListGroupAliment = new ArrayList<Platillo>();
+    }
 }

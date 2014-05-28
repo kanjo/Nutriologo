@@ -74,9 +74,7 @@ public class AlimentosListFragment extends Fragment {
                                                     GroupAlimento grupoAlimento) {
         AlimentosListFragment fragment = new AlimentosListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        args.putParcelable(ARG_PARAM3, grupoAlimento);
+        args.putParcelable(HorarioGroupAlimentosFragment.PARAM_GROUP_ALIMENTO, grupoAlimento);
         fragment.setArguments(args);
         return fragment;
     }
@@ -101,10 +99,7 @@ public class AlimentosListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-            mGroupAlimento = (GroupAlimento) getArguments().getParcelable(ARG_PARAM3);
-
+            mGroupAlimento = getArguments().getParcelable(HorarioGroupAlimentosFragment.PARAM_GROUP_ALIMENTO);
         }
         setHasOptionsMenu(true);
     }
@@ -140,29 +135,32 @@ public class AlimentosListFragment extends Fragment {
         mData = new ArrayList<ExpandableBaseItem>();
 
 
-        if(mGroupAlimento.alimentoType == AlimentoType.ALIMENTO_PORCION) {
-            GroupAlimentoPorcion alimentoList =
-                    (GroupAlimentoPorcion) mGroupAlimento;
-            for ( AlimentoPorcion item : alimentoList.listAlimentoPorcion)
+        if(mGroupAlimento.mAlimentoType == AlimentoType.ALIMENTO_PORCION) {
+            AlimentoPorcion mAlimentoPorcion;
+            for ( Object item : mGroupAlimento.mListGroupAliment) {
+                mAlimentoPorcion =(AlimentoPorcion)item;
                 mData.add(
-                            new ExpandableAlimentoItem(item.descripcion,
-                                                       String.valueOf(item.porcion),
-                                                       item.tipoMedida,
-                                                       R.drawable.test_guacamole_salad,
-                                                       CELL_DEFAULT_HEIGHT));
+                        new ExpandableAlimentoItem(mAlimentoPorcion.descripcion,
+                                String.valueOf(mAlimentoPorcion.porcion),
+                                mAlimentoPorcion.tipoMedida,
+                                R.drawable.test_guacamole_salad,
+                                CELL_DEFAULT_HEIGHT)
+                );
+            }
             mAdapter = new AdapterAlimentoList(getActivity(),mData);
 
         }
         else {
-            GroupPlatillo platilloList =
-                    (GroupPlatillo) mGroupAlimento;
-            for(Platillo item : platilloList.listPlatillo)
+            Platillo platillo;
+            for(Object item : mGroupAlimento.mListGroupAliment) {
+                platillo= (Platillo)item;
                 mData.add(
-                            new ExpandablePlatilloItem(item.descripcion,
-                                                       R.drawable.test_guacamole_salad,
-                                                       CELL_DEFAULT_HEIGHT,
-                                                       item.receta));
-
+                        new ExpandablePlatilloItem(platillo.descripcion,
+                                R.drawable.test_guacamole_salad,
+                                CELL_DEFAULT_HEIGHT,
+                                platillo.receta)
+                );
+            }
             mAdapter= new AdapterPlatilloList(getActivity(),mData);
         }
 

@@ -8,32 +8,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.kanjo.health.e_diet.app.UI.Fragments.HorarioGroupAlimentosFragment;
+import com.kanjo.health.e_diet.app.domain.Horario;
 import com.kanjo.health.e_diet.app.profile.DietProfileManager;
 
 public class GroupFoodActivity extends SingleFragmentActivity {
 
 
-    DietProfileManager dietProfileManager;
-
-    private void initProfile ()
-    {
-        dietProfileManager= new DietProfileManager();
-        //TODO : implement profile to construct the schedule
-        dietProfileManager.createDietHorarios();
-    }
-
-
+    DietProfileManager dietProfileManager  = new DietProfileManager();
 
     @Override
     protected Fragment createFragment() {
 
         Intent intentParams = getIntent();
-        //TODO: GET the Horario from the activity
-        String test = intentParams.getStringExtra("testParam");
 
-        initProfile();
+        Bundle mBundleParams ;
+
+        if(intentParams!=null && (mBundleParams=intentParams.getExtras())!=null)
+        {
+            Horario  mHorario =
+                    (Horario)mBundleParams.get(PagerMainActivity.KEY_HORARIO);
+
+            if(mHorario!=null)
+                return HorarioGroupAlimentosFragment.newInstance("",mHorario);
+        }
+        String test = intentParams.getStringExtra("testParam");
         return
-                HorarioGroupAlimentosFragment.newInstance("",dietProfileManager.mHorarioList.get(0));
+                HorarioGroupAlimentosFragment.newInstance("",dietProfileManager.getHorario(0));
     }
 
 }

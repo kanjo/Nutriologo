@@ -2,43 +2,48 @@ package com.kanjo.health.e_diet.app.profile;
 
 import android.support.v4.util.ArrayMap;
 
+import com.kanjo.health.e_diet.app.core.IDietaBuilder;
 import com.kanjo.health.e_diet.app.domain.GroupAlimento;
 import com.kanjo.health.e_diet.app.domain.GroupAlimentosFactory;
-import com.kanjo.health.e_diet.app.domain.HorariosFactory;
-
+import com.kanjo.health.e_diet.app.domain.Horario;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by JARP on 4/13/14.
  *
- * Sets the quantity and the relation of nutritional facts
+ * Sets the mQuantity and the relation of nutritional facts
  */
-public class DietProfileManager {
+public class DietProfileManager implements IDietaBuilder {
+
+    public DietProfileManager()
+    {
+        createDietHorarios();
+    }
 
 
-    HorariosFactory.DESAYUNO desayuno;
-    HorariosFactory.COLACION medioDia;
-    HorariosFactory.COMIDA comida;
-    HorariosFactory.COLACION mediaTarde;
-    HorariosFactory.CENA cena;
+    Horario desayuno;
+    Horario medioDia;
+    Horario comida;
+    Horario mediaTarde;
+    Horario cena;
 
-    public Map<String,HorariosFactory.Horario> mHorariosMap;
+    private Map<String,Horario> mHorariosMap;
 
-    public List<HorariosFactory.Horario> mHorarioList;
+    private List<Horario> mHorarioList;
 
     GroupAlimentosFactory factoryGrupoAlimentos = new GroupAlimentosFactory();
 
-    HorariosFactory horariosFactory;
 
-    public void createDietHorarios()
+    private void createDietHorarios()
     {
-        mHorariosMap = new ArrayMap<String, HorariosFactory.Horario>();
+        mHorariosMap = new ArrayMap<String, Horario>();
 
-        horariosFactory = new HorariosFactory();
-
-        mHorarioList = new ArrayList<HorariosFactory.Horario>();
+        mHorarioList = new ArrayList<Horario>();
 
         createDesayuno();
 
@@ -57,44 +62,51 @@ public class DietProfileManager {
     //TODO: Definir cuando se agregan verduras, ensaladas etc.. en base a un profile
     private void createDesayuno()
     {
-        desayuno = horariosFactory.new DESAYUNO();
+        desayuno = new Horario();
+
+        desayuno.DateTimeHorario = new java.util.Date();
+
+        GregorianCalendar c = new GregorianCalendar(2000,02,02,8,00,00);
+        desayuno.DateTimeHorario = c.getGregorianChange();
 
         desayuno.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
-        mVerduras.quantity =1;
+        mVerduras.mQuantity =1;
         desayuno.ListGroupAlimentos.add(mVerduras);
 
         /*Frutas*/
         GroupAlimentosFactory.FRUTAS mFrutas= factoryGrupoAlimentos. new FRUTAS();
-        mFrutas.quantity=1;
+        mFrutas.mQuantity=1;
         desayuno.ListGroupAlimentos.add(mFrutas);
 
         /*Cereales*/
         GroupAlimentosFactory.CerealesConGrasa mCereales= factoryGrupoAlimentos. new CerealesConGrasa();
-        mCereales.quantity=1;
+        mCereales.mQuantity=1;
         desayuno.ListGroupAlimentos.add(mCereales);
 
         /*POA bajo aporte en grasa*/
         GroupAlimentosFactory.POABajoAporteGrasa mPOA = factoryGrupoAlimentos. new POABajoAporteGrasa();
-        mPOA.quantity = 2;
+        mPOA.mQuantity = 2;
         desayuno.ListGroupAlimentos.add(mPOA);
 
 
         /*Aceites con Proteina*/
         GroupAlimentosFactory.AceitesConProteina mAceitesConProteina = factoryGrupoAlimentos. new AceitesConProteina();
-        mAceitesConProteina.quantity = 1;
+        mAceitesConProteina.mQuantity = 1;
         desayuno.ListGroupAlimentos.add(mAceitesConProteina);
 
         /*Aceites sin Proteina*/
         GroupAlimentosFactory.AceitesSinProteina mAceitesSinProteina = factoryGrupoAlimentos.new AceitesSinProteina();
-        mAceitesSinProteina.quantity = 1;
+        mAceitesSinProteina.mQuantity = 1;
         desayuno.ListGroupAlimentos.add(mAceitesSinProteina);
 
         /*
             Agregamos al map el desyuno
          */
+
+        desayuno.DESCRIPTION="Desayuno";
         mHorariosMap.put(desayuno.DESCRIPTION,desayuno);
         mHorarioList.add(desayuno);
 
@@ -105,12 +117,15 @@ public class DietProfileManager {
     private void createColacionMedioDia()
     {
 
-        medioDia = horariosFactory. new COLACION();
+        medioDia = new Horario();
+        medioDia.DESCRIPTION= "Colación";
+        GregorianCalendar c = new GregorianCalendar(2000,02,02,11,00,00);
+        medioDia.DateTimeHorario = c.getGregorianChange();
 
         medioDia.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
-        mVerduras.quantity =1;
+        mVerduras.mQuantity =1;
         medioDia.ListGroupAlimentos.add(mVerduras);
 
         /*
@@ -125,28 +140,31 @@ public class DietProfileManager {
     private void createComida()
     {
 
-        comida = horariosFactory. new COMIDA();
+        comida = new Horario();
+        comida.DESCRIPTION="Comida";
+        GregorianCalendar c = new GregorianCalendar(2000,02,02,14,00,00);
+        comida.DateTimeHorario = c.getGregorianChange();
 
         comida.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
-        mVerduras.quantity =2;
+        mVerduras.mQuantity =2;
         comida.ListGroupAlimentos.add(mVerduras);
 
         /*TODO: Revisar Entradas*/
         /*GroupAlimentosFactory.Entradas mEntradas= factoryGrupoAlimentos. new Entradas();
-        mVerduras.quantity =2;
+        mVerduras.mQuantity =2;
         comida.ListGroupAlimentos.add(mVerduras);*/
 
         /*POA Muy Bajo Aporte de grasa*/
         GroupAlimentosFactory.POAMuyBajoAporteDeGrasa mPOA = factoryGrupoAlimentos.new POAMuyBajoAporteDeGrasa();
-        mPOA.quantity=2;
+        mPOA.mQuantity=2;
         comida.ListGroupAlimentos.add(mPOA);
 
         /*AceitesSinProteina*/
         GroupAlimentosFactory.AceitesSinProteina mAceitesSinProteina = factoryGrupoAlimentos. new AceitesSinProteina();
-        mAceitesSinProteina.quantity = 1;
+        mAceitesSinProteina.mQuantity = 1;
         comida.ListGroupAlimentos.add(mAceitesSinProteina);
 
         /*
@@ -160,13 +178,17 @@ public class DietProfileManager {
     //TODO: Definir cuando se agregan verduras, ensaladas etc.. en base a un profile
     private void createColacionMediaTarde() {
 
-        mediaTarde = horariosFactory. new COLACION();
+        mediaTarde = new Horario();
+        mediaTarde.DESCRIPTION = "Colación";
+
+        GregorianCalendar c = new GregorianCalendar(2000,02,02,19,00,00);
+        mediaTarde.DateTimeHorario = c.getGregorianChange();
 
         mediaTarde.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Verduras*/
         GroupAlimentosFactory.VERDURAS mVerduras= factoryGrupoAlimentos. new VERDURAS();
-        mVerduras.quantity =1;
+        mVerduras.mQuantity =1;
         mediaTarde.ListGroupAlimentos.add(mVerduras);
 
         /*
@@ -181,17 +203,18 @@ public class DietProfileManager {
     //TODO: Definir cuando se agregan verduras, ensaladas etc.. en base a un profile
     private void createCena() {
 
-        cena = horariosFactory.new CENA();
+        cena = new Horario();
+        cena.DESCRIPTION="Cena";
         cena.ListGroupAlimentos = new ArrayList<GroupAlimento>();
 
         /*Leche*/
         GroupAlimentosFactory.Leche mLeche = factoryGrupoAlimentos. new Leche();
-        mLeche.quantity = 1;
+        mLeche.mQuantity = 1;
         cena.ListGroupAlimentos.add(mLeche);
 
         /*AceitesConProteina*/
         GroupAlimentosFactory.AceitesConProteina mAceitesConProteina = factoryGrupoAlimentos. new AceitesConProteina();
-        mAceitesConProteina.quantity = 1;
+        mAceitesConProteina.mQuantity = 1;
         cena.ListGroupAlimentos.add(mAceitesConProteina);
 
         /*
@@ -202,6 +225,21 @@ public class DietProfileManager {
 
     }
 
+
+
+    @Override
+    public Horario getHorario(int i) {
+        if(mHorarioList==null || mHorarioList.size()==0)
+            return null;
+        return  mHorarioList.get(i);
+    }
+
+    @Override
+    public List<Horario> getAllHorarios() {
+        if(mHorarioList==null || mHorarioList.size()==0)
+            return null;
+        return  mHorarioList;
+    }
 
 }
 

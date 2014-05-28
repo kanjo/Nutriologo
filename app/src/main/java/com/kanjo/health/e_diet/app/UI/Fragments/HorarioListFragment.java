@@ -88,9 +88,8 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
         //Create instantiate profileManager ;
         dietProfileManager= new DietProfileManager();
         //TODO : implement profile to construct the schedule
-        dietProfileManager.createDietHorarios();
 
-        mAdapter = new AdapterHorarios(getActivity(),0, dietProfileManager.mHorarioList);
+        mAdapter = new AdapterHorarios(getActivity(),0, dietProfileManager.getAllHorarios());
     }
 
     @Override
@@ -137,8 +136,8 @@ public class HorarioListFragment extends Fragment implements AbsListView.OnItemC
                 f.beginTransaction().
                 replace(R.id.container,
                         HorarioGroupAlimentosFragment.newInstance(
-                                    dietProfileManager.mHorarioList.get(position).DESCRIPTION,
-                                    dietProfileManager.mHorarioList.get(position))).
+                                    dietProfileManager.getHorario(position).DESCRIPTION,
+                                    dietProfileManager.getHorario(position))).
                 addToBackStack("GrupoAlimentos").
                 commit();
 

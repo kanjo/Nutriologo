@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kanjo.health.e_diet.app.R;
-import com.kanjo.health.e_diet.app.domain.HorariosFactory;
+import com.kanjo.health.e_diet.app.domain.Horario;
 
 import java.util.List;
 
@@ -17,13 +17,13 @@ import java.util.List;
 /**
  * Created by JARP on 4/9/14.
  */
-public class AdapterHorarios extends ArrayAdapter<HorariosFactory.Horario> {
+public class AdapterHorarios extends ArrayAdapter<Horario> {
 
     Context mContext;
 
-    List<HorariosFactory.Horario>mHorarios;
+    List<Horario>mHorarios;
 
-    public AdapterHorarios(Context context, int resource, List<HorariosFactory.Horario> horarios) {
+    public AdapterHorarios(Context context, int resource, List<Horario> horarios) {
         super(context, R.layout.horario_item,horarios);
 
         mHorarios = horarios;

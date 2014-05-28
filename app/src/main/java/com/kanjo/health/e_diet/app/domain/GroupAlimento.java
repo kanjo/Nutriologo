@@ -3,15 +3,13 @@ package com.kanjo.health.e_diet.app.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 /**
  * Created by JARP on 5/14/14.
  */
-public class GroupAlimento implements Parcelable
+public class GroupAlimento extends BaseGroupFood implements Parcelable
 {
-    public int quantity;
-    public String description;
-    public AlimentoType alimentoType;
-
     @Override
     public int describeContents() {
         return 0;
@@ -19,21 +17,20 @@ public class GroupAlimento implements Parcelable
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(quantity);
-        parcel.writeString(description);
-        parcel.writeString(alimentoType==null?"":alimentoType.name());
+        parcel.writeInt(mQuantity);
+        parcel.writeString(mDescription);
+        parcel.writeString(mAlimentoType==null?"":mAlimentoType.name());
+        parcel.writeList(mListGroupAliment);
+
+
 
     }
 
     public static final Parcelable.Creator<GroupAlimento> CREATOR =  new Parcelable.Creator<GroupAlimento>() {
 
-        public GroupAlimento createFromParcel(Parcel parcel, ClassLoader classLoader) {
-            return null;
-        }
-
         @Override
         public GroupAlimento createFromParcel(Parcel parcel) {
-            return null;
+            return new GroupAlimento(parcel);
         }
 
         @Override
@@ -44,7 +41,12 @@ public class GroupAlimento implements Parcelable
 
     private GroupAlimento(Parcel in)
     {
-
+        mQuantity = in.readInt();
+        mDescription = in.readString();
+        mAlimentoType = AlimentoType.valueOf( in.readString() );
+        mListGroupAliment = ( mAlimentoType == AlimentoType.PLATILLO ) ?
+                            in.readArrayList(GroupPlatillo.class.getClassLoader()):
+                            in.readArrayList(GroupAlimentoPorcion.class.getClassLoader());
     }
 
     public GroupAlimento()

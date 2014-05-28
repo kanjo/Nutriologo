@@ -9,6 +9,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Build;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -181,8 +182,8 @@ public class ExpandingListViewAlimentos extends ListView {
         for (int i = 0; i < childCount; i++) {
             View v = getChildAt(i);
 
-            v.setHasTransientState(true);
-            //ViewCompat.setHasTransientState(v,true);
+            //v.setHasTransientState(true);
+            ViewCompat.setHasTransientState(v,true);
             oldCoordinates.put(v, new int[]{v.getTop(), v.getBottom()});
         }
 
@@ -282,8 +283,8 @@ public class ExpandingListViewAlimentos extends ListView {
                             int delta = i > index ? yTranslateBottom : -yTranslateTop;
                             animations.add(getAnimation(v, delta, delta));
                         }
-                        //ViewCompat.setHasTransientState(v,false);
-                        v.setHasTransientState(false);
+                        ViewCompat.setHasTransientState(v, false);
+                        //v.setHasTransientState(false);
                     }
                 }
 
@@ -309,8 +310,8 @@ public class ExpandingListViewAlimentos extends ListView {
                         setClickable(true);
                         if (mViewsToDraw.size() > 0) {
                             for (View v : mViewsToDraw) {
-                                v.setHasTransientState(false);
-                                //ViewCompat.setHasTransientState(v,false);
+                                //v.setHasTransientState(false);
+                                ViewCompat.setHasTransientState(v,false);
                             }
                         }
                         mViewsToDraw.clear();
@@ -381,8 +382,8 @@ public class ExpandingListViewAlimentos extends ListView {
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View v = getChildAt(i);
-            v.setHasTransientState(true);
-            //ViewCompat.setHasTransientState(v,true);
+            //v.setHasTransientState(true);
+            ViewCompat.setHasTransientState(v,true);
             oldCoordinates.put(v, new int [] {v.getTop(), v.getBottom()});
         }
 
@@ -461,7 +462,8 @@ public class ExpandingListViewAlimentos extends ListView {
                         * after the collapse then the bounds are reset to their old values.*/
                         v.setTop(old[0]);
                         v.setBottom(old[1]);
-                        v.setHasTransientState(false);
+                        //v.setHasTransientState(false);
+                         ViewCompat.setHasTransientState(v,false);
                     } else {
                         /* If the cell is present in the ListView after the collapse but
                          * not before the collapse then the bounds are calculated using

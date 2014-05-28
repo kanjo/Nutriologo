@@ -32,13 +32,13 @@ public  class GroupAlimentosFactory  {
 
         public VERDURAS()
         {
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildVerduras();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildVerduras();
 
-            description= "Verduras";
+            mDescription= "Verduras";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -47,13 +47,13 @@ public  class GroupAlimentosFactory  {
     {
         public FRUTAS() {
 
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildFrutas();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildFrutas();
 
-            description = "Frutas";
+            mDescription = "Frutas";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
 
@@ -64,13 +64,15 @@ public  class GroupAlimentosFactory  {
     {
         public CerealesConGrasa() {
 
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            super();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildCerealesConGrasa();
+            //mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            description = "Cereales con grasa";
+            mListGroupAliment = GRUPO_ALIMENTOS.buildCerealesConGrasa();
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mDescription = "Cereales con grasa";
+
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -79,13 +81,13 @@ public  class GroupAlimentosFactory  {
 
         public CerealesSinGrasa() {
 
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildCerealesSinGrasa();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildCerealesSinGrasa();
 
-            description = "Cereales sin grasa";
+            mDescription = "Cereales sin grasa";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
 
@@ -140,13 +142,13 @@ public  class GroupAlimentosFactory  {
 
         public POAMuyBajoAporteDeGrasa() {
 
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
 
-            description = "POA muy bajo aporte de grasa";
+            mDescription = "POA muy bajo aporte de grasa";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -156,13 +158,13 @@ public  class GroupAlimentosFactory  {
 
         public POABajoAporteGrasa()
         {
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildPOABajoAporteGrasa();
 
-            description = "POA bajo aporte de grasa";
+            mDescription = "POA bajo aporte de grasa";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -172,13 +174,13 @@ public  class GroupAlimentosFactory  {
     {
         public Leche()
         {
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildLecheSemiDescremada();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildLecheSemiDescremada();
 
-            description = "Leche semidescremada";
+            mDescription = "Leche semidescremada";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
 
     }
@@ -187,13 +189,13 @@ public  class GroupAlimentosFactory  {
     {
         public AceitesSinProteina()
         {
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildAceitesSinProteina();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildAceitesSinProteina();
 
-            description = "Aceites sin proteína";
+            mDescription = "Aceites sin proteína";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
     }
 
@@ -201,13 +203,13 @@ public  class GroupAlimentosFactory  {
     {
         public AceitesConProteina()
         {
-            listAlimentoPorcion = new ArrayList<AlimentoPorcion>();
+            mListGroupAliment = new ArrayList<AlimentoPorcion>();
 
-            listAlimentoPorcion = GRUPO_ALIMENTOS.buildAceitesConProteina();
+            mListGroupAliment = GRUPO_ALIMENTOS.buildAceitesConProteina();
 
-            description = "Aceites con proteína";
+            mDescription = "Aceites con proteína";
 
-            alimentoType = AlimentoType.ALIMENTO_PORCION;
+            mAlimentoType = mAlimentoType.ALIMENTO_PORCION;
         }
     }
 

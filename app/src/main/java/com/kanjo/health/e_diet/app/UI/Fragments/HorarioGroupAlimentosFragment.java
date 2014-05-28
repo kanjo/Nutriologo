@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,8 +18,8 @@ import android.widget.ListAdapter;
 import com.kanjo.health.e_diet.app.AlimentosListActivity;
 import com.kanjo.health.e_diet.app.R;
 import com.kanjo.health.e_diet.app.UI.AdapterGroupAlimentos;
-import com.kanjo.health.e_diet.app.domain.HorariosFactory;
-
+import com.kanjo.health.e_diet.app.domain.GroupAlimento;
+import com.kanjo.health.e_diet.app.domain.Horario;
 
 /**
  * Created by JARP on 4/15/14.
@@ -31,6 +30,8 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
     private final static String PARAM_HORARIO="Horario" ;
 
     private String mHorarioSelected ;
+
+    public final static String PARAM_GROUP_ALIMENTO = "GROUP_ALIMENTO";
 
     /**
      * The fragment's ListView/GridView.
@@ -44,13 +45,11 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
     private ListAdapter mAdapter;
 
     //Horario : Desayuno, Comida, Cena , Colación
-    HorariosFactory.Horario mHorario;
+    Horario mHorario;
 
-    public static HorarioGroupAlimentosFragment newInstance(String param1, HorariosFactory.Horario horario) {
+    public static HorarioGroupAlimentosFragment newInstance(String param1, Horario horario) {
         HorarioGroupAlimentosFragment fragment = new HorarioGroupAlimentosFragment();
         Bundle args = new Bundle();
-        //args.putString(,param1);
-        //New Line
         args.putParcelable(PARAM_HORARIO,horario);
         fragment.setArguments(args);
         return fragment;
@@ -63,8 +62,7 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-             //mHorarioSelected= getArguments().getString(PARAM_HORARIO);
-             mHorario = (HorariosFactory.Horario)getArguments().getParcelable(PARAM_HORARIO);
+             mHorario = getArguments().getParcelable(PARAM_HORARIO);
         }
 
         mAdapter = new AdapterGroupAlimentos(getActivity(),R.layout.group_alimento_item,mHorario);
@@ -104,18 +102,11 @@ public class HorarioGroupAlimentosFragment extends Fragment implements AbsListVi
 
         Intent intentAlimentosListActivity = new Intent(getActivity(), AlimentosListActivity.class);
 
-        startActivity(intentAlimentosListActivity);
+        GroupAlimento a = mHorario.ListGroupAlimentos.get(i);
 
-        /*
-        FragmentManager f = this.getFragmentManager();
-        //Create the new fragment with the specify aliment of group
-        if(f!=null)
-            f.beginTransaction().
-                    replace(R.id.container,
-                            AlimentosListFragment.newInstance("","",mHorario.ListGroupAlimentos.get(i))).
-                    addToBackStack("GrupoAlimento").
-                    commit();
-        */
+        intentAlimentosListActivity.putExtra(HorarioGroupAlimentosFragment.PARAM_GROUP_ALIMENTO,a);
+
+        startActivity(intentAlimentosListActivity);
 
     }
 
