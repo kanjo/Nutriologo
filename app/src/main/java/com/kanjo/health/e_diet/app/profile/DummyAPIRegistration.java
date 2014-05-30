@@ -93,7 +93,7 @@ public class DummyAPIRegistration implements IRegisterProfileKanjo {
                 params.add(new BasicNameValuePair("token",token));
                 params.add(new BasicNameValuePair("user",user));
 
-                HttpGet mGet = new HttpGet("http://api.kanjo.com.mx/regdevice/e-diet/gcm/post?token"+token+"&user="+user);
+                HttpGet mGet = new HttpGet("http://api.kanjo.com.mx/regdevice/e-diet/gcm/post?token="+token+"&user="+user);
 
                 try {
 
