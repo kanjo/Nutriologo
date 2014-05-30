@@ -37,7 +37,7 @@ public class ProfileRegister {
             @Override
             protected Object doInBackground(Object[] objects) {
 
-                mKanjoRegistration = new DummyAPIRegistration(mContext);
+                mKanjoRegistration = new DummyAPIRegistration(mContext,true);
 
                 if(!mKanjoRegistration.isRegisteredInKanjo()) {
                     registerProfileGCM = new GCMConcreteRegistration(mContext, onCompleteToken);

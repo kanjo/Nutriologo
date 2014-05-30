@@ -14,6 +14,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -37,7 +38,7 @@ public class DummyAPIRegistration implements IRegisterProfileKanjo {
 
     private Context mContext;
 
-    public DummyAPIRegistration(Context context) {
+    public DummyAPIRegistration(Context context, boolean deleteKey) {
         if(context == null)
             throw  new IllegalArgumentException("Context can not be null");
         mContext = context;
@@ -47,6 +48,9 @@ public class DummyAPIRegistration implements IRegisterProfileKanjo {
             mSharedPreferences= mContext.getSharedPreferences(mFilName,context.MODE_MULTI_PROCESS);
 
         mSharedPreferences=PreferenceManager.getDefaultSharedPreferences(mContext);
+
+        if(deleteKey)
+            mSharedPreferences.edit().putBoolean(mContext.getString(R.string.is_register_in_kanjo),false).commit();
     }
 
     @Override
@@ -81,17 +85,19 @@ public class DummyAPIRegistration implements IRegisterProfileKanjo {
 
                 //http://api.kanjo.com.mx/regdevice/e-diet/gcm/post?token=numero_token&user=usuario
 
-                HttpPost mPost = new HttpPost("http://api.kanjo.com.mx/regdevice/e-diet/gcm/");
+                HttpPost mPost =
+                new HttpPost("http://api.kanjo.com.mx/regdevice/e-diet/gcm/post?token=APA91bFTZW9ye7gIRcaoBAr0RpZCLbW2r6yrO3cyjhUKQfEusue4N53ELJ4X6vj5I4jd3ZGBa1o48esDlVvU-51nMbQGLoXpyPkT0Dhb7l9C8DEWy2HQ6uK-1AmN1EV8Ar0flyaa_yLnzO8lHJcrrIkecaILBJ5O5orGi-XhvKGurTtqr_rS9kI&user=KanjoTest");
 
-                List<NameValuePair> params= new ArrayList<NameValuePair>();
+                List<NameValuePair> params= new ArrayList<NameValuePair>(2);
 
                 params.add(new BasicNameValuePair("token",token));
                 params.add(new BasicNameValuePair("user",user));
 
-                try {
-                    mPost.setEntity(new UrlEncodedFormEntity(params));
+                HttpGet mGet = new HttpGet("http://api.kanjo.com.mx/regdevice/e-diet/gcm/post?token"+token+"&user="+user);
 
-                    HttpResponse response = client.execute(mPost);
+                try {
+
+                    HttpResponse response = client.execute(mGet);
                 }
                 catch (ClientProtocolException cpEX)
                 {
