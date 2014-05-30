@@ -18,7 +18,7 @@
     <string name="title_activity_pager_test">PagerTest</string>
     <string name="title_activity_gruop_food">GruopFoodActivity</string>
     <string name="title_activity_alimentos">AlimentosActivity</string>
-    <string name="ProjectGCMID">140087784948</string>
+    <string name="ProjectGCMID"></string>
     <string name="preference_file">KanjoPreferenceFile</string>
     <string name="is_register_in_kanjo">is_register_in_kanjo</string>
 
