@@ -21,6 +21,7 @@ import com.kanjo.health.e_diet.app.UI.CustomViews.HorarioView;
 import com.kanjo.health.e_diet.app.UI.ZoomOutPageTransformer;
 import com.kanjo.health.e_diet.app.domain.Horario;
 import com.kanjo.health.e_diet.app.profile.DietProfileManager;
+import com.kanjo.health.e_diet.app.profile.ProfileRegister;
 
 
 public class PagerMainActivity extends ActionBarActivity
@@ -61,6 +62,9 @@ public class PagerMainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pager_test);
+
+        //Check if this device is already register
+        new ProfileRegister().manageRegistration(getApplicationContext());
 
         //TODO : implement the DietProfile
         dietProfileManager= new DietProfileManager();
