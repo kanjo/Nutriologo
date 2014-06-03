@@ -30,6 +30,9 @@ public class ProfileRegister {
     public void manageRegistration(Context context)
     {
 
+        //TODO: CHECK PLAY SERVICES
+        //like http://developer.android.com/google/gcm/client.html
+
         mContext = context;
 
         new AsyncTask() {
