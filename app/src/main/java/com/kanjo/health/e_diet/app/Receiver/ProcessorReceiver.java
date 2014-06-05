@@ -32,22 +32,30 @@ public class ProcessorReceiver implements IProcessorMessage {
         final NotificationManager mNotificationManager =
                 (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        String message =null;
+        String message ="There was an error with your message";
         if (mIntent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")) {
             Bundle extras = mIntent.getExtras();
-            message= extras.getString("default");
-        }
+            if(extras!=null){
+
+                if(extras.getString("default")!=null)
+                    message = extras.getString("default");
+                }
+                else
+                for(String key: extras.keySet()){
+                    message+= key + "=" + extras.getString(key) + "\n";
+                }
+            }
+
 
         Intent mIntent = new Intent(mContext, PagerMainActivity.class);
 
         final PendingIntent mPendingIntent =
                 PendingIntent.getActivity(mContext,0,mIntent, Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL);
 
-        if(message==null)
-            message="Error no message receive";
-        Notification mNotification = new NotificationCompat.Builder(mContext)
+
+    Notification mNotification = new NotificationCompat.Builder(mContext)
                                         .setSmallIcon(R.drawable.ic_launcher)
-                                        .setContentTitle("e-Diet has a new message")
+                                        .setContentTitle("e-diet deliver a new message!")
                                         .setContentText(message)
                                         .setContentIntent(mPendingIntent)
                                         .setAutoCancel(true)
