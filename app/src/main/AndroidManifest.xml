@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kanjo.health.e_diet.app" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="com.example.gcm.permission.C2D_MESSAGE"
+    <permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-
         <activity
-            android:name="com.kanjo.health.e_diet.app.PagerMainActivity"
+            android:name=".PagerMainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.kanjo.health.e_diet.app.GroupFoodActivity"
+            android:name=".GroupFoodActivity"
             android:label="Group Activity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kanjo.health.e_diet.app.PagerMainActivity" />
         </activity>
         <activity
-            android:name="com.kanjo.health.e_diet.app.AlimentosListActivity"
+            android:name=".AlimentosListActivity"
             android:label="@string/title_activity_alimentos" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,11 +42,24 @@
         </activity>
 
         <service
-            android:name="com.kanjo.health.e_diet.app.Service.KanjoDietService"
+            android:name=".Service.KanjoDietService"
             android:enabled="true"
             android:exported="true" >
         </service>
 
+        <receiver
+            android:name=".Receiver.DietReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.REGISTER" />
+                <category android:name="com.kanjo.health.e_diet.app"></category>
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>
