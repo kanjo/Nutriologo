@@ -4,10 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-public class DietReceiver extends BroadcastReceiver {
+public class DietBroadcastReceiver extends BroadcastReceiver {
 
     IProcessorMessage processorMessage = new ProcessorReceiver();
-    public DietReceiver() {
+    public DietBroadcastReceiver() {
     }
 
     @Override
