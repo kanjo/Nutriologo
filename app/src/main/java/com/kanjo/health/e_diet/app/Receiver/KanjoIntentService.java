@@ -8,6 +8,8 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.kanjo.health.e_diet.app.KanjoAPI.APIClient;
+import com.kanjo.health.e_diet.app.core.ICommunicatorAPI;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -91,6 +93,7 @@ public class KanjoIntentService extends IntentService {
                         // If it's a regular GCM message, do some work.
                     } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                         processorMessage.processMessage(intent, getApplicationContext());
+
                         Log.i(TAG, "Received: " + extras.toString());
                     }
                 }

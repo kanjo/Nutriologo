@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
+import com.kanjo.health.e_diet.app.KanjoAPI.APIClient;
 import com.kanjo.health.e_diet.app.PagerMainActivity;
 import com.kanjo.health.e_diet.app.R;
+import com.kanjo.health.e_diet.app.core.ICommunicatorAPI;
 
 /**
  * Created by JARP on 6/4/14.
@@ -25,6 +27,9 @@ public class ProcessorReceiver implements IProcessorMessage {
         mIntent= intent;
         if(intent!=null)
             postNotification();
+
+        ICommunicatorAPI api = new APIClient();
+        api.getJSON(context);
     }
 
     private void postNotification()

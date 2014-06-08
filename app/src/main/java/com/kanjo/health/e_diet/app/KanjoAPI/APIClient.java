@@ -1,25 +1,21 @@
 package com.kanjo.health.e_diet.app.KanjoAPI;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.kanjo.health.e_diet.app.core.ICommunicatorAPI;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by JARP on 6/7/14.
@@ -28,12 +24,19 @@ public class APIClient implements ICommunicatorAPI {
 
 
     @Override
-    public String getJSON() {
+    public String getJSON(Context context) {
+
+
+        getResponse(context);
         return "";
+
+
     }
 
-    private void getJson()
+    private void getResponse(final Context context)
     {
+
+        //Toast.makeText(context,"Response" ,Toast.LENGTH_SHORT).show();
         new AsyncTask()
         {
 
@@ -43,10 +46,10 @@ public class APIClient implements ICommunicatorAPI {
                 HttpClient client = new DefaultHttpClient();
 
 
+                String url ="http://hmkcode.com/examples/index.php";
+                //url="http://api.kanjo.com.mx/json/test";
 
-
-
-                HttpGet mGet = new HttpGet("http://api.kanjo.com.mx/json/test");
+                HttpGet mGet = new HttpGet(url);
 
                 try {
 
@@ -61,7 +64,7 @@ public class APIClient implements ICommunicatorAPI {
                         l = in.read(buf);
                     }
 
-
+                    return builder.toString();
 
                 }
                 catch (ClientProtocolException cpEX)
@@ -72,9 +75,15 @@ public class APIClient implements ICommunicatorAPI {
                 {
 
                 }
-                return true;
+                return  "Not result";
+
             }
-        }.execute(null);
+
+            @Override
+            protected void onPostExecute(Object o) {
+                Toast.makeText(context,"Response" + o.toString() ,Toast.LENGTH_SHORT).show();
+            }
+        }.execute(context);
 
     }
 }
