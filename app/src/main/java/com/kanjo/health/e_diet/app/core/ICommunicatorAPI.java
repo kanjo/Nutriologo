@@ -9,6 +9,6 @@ public interface ICommunicatorAPI {
 
     //TODO: Think in some behavior that works with the API
     //TODO : by now we get some JSON by url
-    String getJSON(Context context);
+    String getJSON(Context context,String requestAPI);
 
 }

@@ -4,12 +4,9 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.kanjo.health.e_diet.app.KanjoAPI.APIClient;
-import com.kanjo.health.e_diet.app.core.ICommunicatorAPI;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -77,7 +74,7 @@ public class KanjoIntentService extends IntentService {
                 // in your BroadcastReceiver.
                 String messageType = gcm.getMessageType(intent);
 
-                IProcessorMessage processorMessage = new ProcessorReceiver();
+                IProcessorMessage processorMessage = new ProcessorMeesageReceiver();
 
 
                 if (!extras.isEmpty()) {  // has effect of unparcelling Bundle

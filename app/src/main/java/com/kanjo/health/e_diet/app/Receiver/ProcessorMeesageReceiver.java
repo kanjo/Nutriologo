@@ -16,7 +16,7 @@ import com.kanjo.health.e_diet.app.core.ICommunicatorAPI;
 /**
  * Created by JARP on 6/4/14.
  */
-public class ProcessorReceiver implements IProcessorMessage {
+public class ProcessorMeesageReceiver implements IProcessorMessage {
 
     //TODO we need to do more things than just send notifications
     Context mContext ;
@@ -28,29 +28,38 @@ public class ProcessorReceiver implements IProcessorMessage {
         if(intent!=null)
             postNotification();
 
-        ICommunicatorAPI api = new APIClient();
-        api.getJSON(context);
+
     }
 
     private void postNotification()
     {
-        final NotificationManager mNotificationManager =
-                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        //TODO :  need a better implementation this is awful!!
         String message ="There was an error with your message";
         if (mIntent.getAction().equals("com.google.android.c2dm.intent.RECEIVE")) {
             Bundle extras = mIntent.getExtras();
-            if(extras!=null){
+            if (extras != null) {
 
-                if(extras.getString("default")!=null)
+
+                if (extras.getString("messageType") != null && extras.getString("messageType").equals("pop")) {
+                        postNotification(extras.getString("message"));
+                } else if (extras.getString("default") != null) {
                     message = extras.getString("default");
-                }
-                else
-                for(String key: extras.keySet()){
-                    message+= key + "=" + extras.getString(key) + "\n";
-                }
-            }
+                    postNotification(message);
 
+                } else if (extras.getString("messageType") != null && extras.getString("messageType").equals("KanjoAPICall")) {
+                    getTaskAPI(extras.getString("APIRequest"));//
+                }
+
+            }
+        }
+
+    }
+
+    private void postNotification(String message)
+    {
+        final NotificationManager mNotificationManager =
+                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent mIntent = new Intent(mContext, PagerMainActivity.class);
 
@@ -58,16 +67,22 @@ public class ProcessorReceiver implements IProcessorMessage {
                 PendingIntent.getActivity(mContext,0,mIntent, Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL);
 
 
-    Notification mNotification = new NotificationCompat.Builder(mContext)
-                                        .setSmallIcon(R.drawable.ic_launcher)
-                                        .setContentTitle("e-diet deliver a new message!")
-                                        .setContentText(message)
-                                        .setContentIntent(mPendingIntent)
-                                        .setAutoCancel(true)
-                                        .build();
+        Notification mNotification = new NotificationCompat.Builder(mContext)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle("e-diet deliver a new message!")
+                .setContentText(message)
+                .setContentIntent(mPendingIntent)
+                .setAutoCancel(true)
+                .build();
 
         //TODO:An identifier for this notification unique within your application.
         mNotificationManager.notify(1,mNotification);
+    }
 
+
+    private void getTaskAPI(String requestAPI)
+    {
+        ICommunicatorAPI api = new APIClient();
+        api.getJSON(mContext,requestAPI);
     }
 }

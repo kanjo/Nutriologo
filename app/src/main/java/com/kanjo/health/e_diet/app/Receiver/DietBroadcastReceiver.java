@@ -6,7 +6,7 @@ import android.content.Intent;
 
 public class DietBroadcastReceiver extends BroadcastReceiver {
 
-    IProcessorMessage processorMessage = new ProcessorReceiver();
+    IProcessorMessage processorMessage = new ProcessorMeesageReceiver();
     public DietBroadcastReceiver() {
     }
 

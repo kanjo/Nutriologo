@@ -24,16 +24,18 @@ public class APIClient implements ICommunicatorAPI {
 
 
     @Override
-    public String getJSON(Context context) {
+    public String getJSON(Context context, String requestAPI) {
 
 
-        getResponse(context);
+        getResponse(context,requestAPI);
         return "";
 
 
     }
 
-    private void getResponse(final Context context)
+
+    //TODO: Change string to something more suitable
+    private void getResponse(final Context context, final String requestAPI)
     {
 
         //Toast.makeText(context,"Response" ,Toast.LENGTH_SHORT).show();
@@ -45,11 +47,7 @@ public class APIClient implements ICommunicatorAPI {
 
                 HttpClient client = new DefaultHttpClient();
 
-
-                String url ="http://hmkcode.com/examples/index.php";
-                //url="http://api.kanjo.com.mx/json/test";
-
-                HttpGet mGet = new HttpGet(url);
+                HttpGet mGet = new HttpGet(requestAPI);
 
                 try {
 
